@@ -5,13 +5,6 @@
 #define TMP116_R_ADDR	0x90
 
 
-#define fSCL    100000    
-#if F_CPU < fSCL*36
-	#define TWBR_SET    10     
-#else
-	#define TWBR_SET    (F_CPU/fSCL-16)/2 
-#endif
-
 void PortInit(void)
 {
     DDRB = 0B00000000;
@@ -22,8 +15,8 @@ void PortInit(void)
     PORTD= 0B00000000;
     PIND = 0x00;
 
-    DDRC = 0B00111111;
-    PORTC= 0B00000000;
+    DDRC = 0B00101111;
+    PORTC= 0B00110000;
     PINC = 0x00;
 }
 
@@ -188,14 +181,14 @@ int main(void)
 //	TMP116Init();
 	while(1)
 	{
-	//	str[0] = I2C_Read(0x00)>>8;
-	//	str[1] = I2C_Read(0x00)>>8;
+	//	str[0] = I2C_Read(0x00);
+	//	str[1] = I2C_Read(0x00);
 		i = I2C_Read(0x00);
 		str[0] = (i>>8);
 		str[1] = i&0xFF;
 
 		SendStr(str,2);
-		_delay_ms(2000);
+		_delay_ms(1400);
 	}
 }
 

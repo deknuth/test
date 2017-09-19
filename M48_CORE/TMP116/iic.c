@@ -6,7 +6,7 @@
 	#define MAX 255
 #endif
 
-#define fSCL    200000    // TWI时钟为50KHz 预分频系数=1(TWPS=0)
+#define fSCL    20000    // TWI时钟为50KHz 预分频系数=1(TWPS=0)
 #if F_CPU < fSCL*36
 	#define TWBR_SET    10     // TWBR必须大于等于10
 #else
@@ -31,8 +31,8 @@
 #define Stop() 		(TWCR=(1<<TWINT)|(1<<TWSTO)|(1<<TWEN)) 	//停止I2C
 #define Wait() 		{ while(!(TWCR&(1<<TWINT))); } 	//等待中断发生
 #define TestAck() 	(TWSR&0xf8) 		// 观察返回状态
-#define SetAck 		(TWCR|=(1<<TWEA)) 	// 做出ACK应答
-#define SetNoAck 	(TWCR&=~(1<<TWEA)) 	// 做出Not Ack应答
+#define TW_ACK		((1<<TWINT) | (1<<TWEN) | (1<<TWEA))
+#define TW_NACK		((1<<TWINT) | (1<<TWEN))
 #define Twi() 		(TWCR=(1<<TWINT)|(1<<TWEN)) // 启动I2C
 #define Write8Bit(x)	{TWDR=(x);TWCR=(1<<TWINT)|(1<<TWEN);} 		// 写数据到TWDR
 
@@ -102,18 +102,29 @@ unsigned int I2C_Read(unsigned RegAddress)
 	if(TestAck()!=MR_SLA_ACK) 
 		return 1;
 
+
 	Twi(); 			// 启动主I2C读方式
 	Wait();
 	if(TestAck() != MR_DATA_NOACK) 
 		return 1; 
 	temp = TWDR;		// 读取I2C接收数据
 	temp <<= 8;
-	
-	Twi();
+	SDA_116_L;
+	TWCR = TW_ACK;
 	Wait();
-	if(TestAck() != MR_DATA_NOACK) 
-		return 1;
-	temp |= TWDR;
+	temp |= TWDR;		// 读取I2C接收数据
+	
+	/*
+	TWCR |= 0x04;
+	while(!(TWCR&(1<<TWINT)));
+	temp = TWDR;
+	temp <<= 8;
+	
+	TWCR |= 0x04;
+	while(!(TWCR&(1<<TWINT)));
+	temp += TWDR;
+	*/
 	Stop();
+	
 	return temp;
 }

@@ -15,7 +15,7 @@
   23               	.LM2:
   24 0000 1092 BC00 		sts 188,__zero_reg__
   25               	.LM3:
-  26 0004 8CE0      		ldi r24,lo8(12)
+  26 0004 80EC      		ldi r24,lo8(-64)
   27 0006 8093 B800 		sts 184,r24
   28               	.LM4:
   29 000a 1092 B900 		sts 185,__zero_reg__
@@ -170,112 +170,104 @@
  182 00e4 8091 B900 		lds r24,185
  183 00e8 887F      		andi r24,lo8(-8)
  184 00ea 8832      		cpi r24,lo8(40)
- 185 00ec 01F0      		breq .+2
- 186 00ee 00C0      		rjmp .L17
- 187               	.LM33:
- 188 00f0 84EA      		ldi r24,lo8(-92)
- 189 00f2 8093 BC00 		sts 188,r24
- 190               	.L20:
- 191               	.LM34:
- 192 00f6 8091 BC00 		lds r24,188
- 193 00fa 87FF      		sbrs r24,7
- 194 00fc 00C0      		rjmp .L20
- 195               	.LM35:
- 196 00fe 8091 B900 		lds r24,185
- 197 0102 887F      		andi r24,lo8(-8)
- 198 0104 8031      		cpi r24,lo8(16)
- 199 0106 01F4      		brne .L17
- 200               	.LM36:
- 201 0108 81E9      		ldi r24,lo8(-111)
- 202 010a 8093 BB00 		sts 187,r24
- 203 010e 84E8      		ldi r24,lo8(-124)
- 204 0110 8093 BC00 		sts 188,r24
- 205               	.L21:
- 206               	.LM37:
- 207 0114 8091 BC00 		lds r24,188
- 208 0118 87FF      		sbrs r24,7
- 209 011a 00C0      		rjmp .L21
- 210               	.LM38:
- 211 011c 8091 B900 		lds r24,185
- 212 0120 887F      		andi r24,lo8(-8)
- 213 0122 8034      		cpi r24,lo8(64)
- 214 0124 01F4      		brne .L17
- 215               	.LM39:
- 216 0126 84E8      		ldi r24,lo8(-124)
- 217 0128 8093 BC00 		sts 188,r24
- 218               	.L22:
- 219               	.LM40:
- 220 012c 8091 BC00 		lds r24,188
- 221 0130 87FF      		sbrs r24,7
- 222 0132 00C0      		rjmp .L22
- 223               	.LM41:
- 224 0134 8091 B900 		lds r24,185
- 225 0138 887F      		andi r24,lo8(-8)
- 226 013a 8835      		cpi r24,lo8(88)
- 227 013c 01F4      		brne .L17
- 228               	.LM42:
- 229 013e 9091 BB00 		lds r25,187
- 230               	.LVL6:
- 231               	.LM43:
- 232 0142 84E8      		ldi r24,lo8(-124)
- 233 0144 8093 BC00 		sts 188,r24
- 234               	.L23:
- 235               	.LM44:
- 236 0148 8091 BC00 		lds r24,188
- 237 014c 87FF      		sbrs r24,7
- 238 014e 00C0      		rjmp .L23
- 239               	.LM45:
- 240 0150 8091 B900 		lds r24,185
- 241 0154 887F      		andi r24,lo8(-8)
- 242 0156 8835      		cpi r24,lo8(88)
- 243 0158 01F4      		brne .L17
- 244               	.LM46:
- 245 015a 3C9A      		sbi 39-32,4
- 246               	.LM47:
- 247 015c 4498      		cbi 40-32,4
- 248               	.LM48:
- 249 015e 8091 BB00 		lds r24,187
- 250               	.LM49:
- 251 0162 392F      		mov r19,r25
- 252               	.LVL7:
- 253 0164 20E0      		ldi r18,lo8(0)
- 254               	.LVL8:
- 255               	.LM50:
- 256 0166 482F      		mov r20,r24
- 257               	.LVL9:
- 258 0168 50E0      		ldi r21,lo8(0)
- 259               	.LVL10:
- 260 016a 422B      		or r20,r18
- 261 016c 532B      		or r21,r19
- 262               	.LVL11:
- 263               	.LM51:
- 264 016e 84E9      		ldi r24,lo8(-108)
- 265 0170 8093 BC00 		sts 188,r24
- 266 0174 00C0      		rjmp .L24
- 267               	.LVL12:
- 268               	.L17:
- 269               	.LM52:
- 270 0176 41E0      		ldi r20,lo8(1)
- 271 0178 50E0      		ldi r21,hi8(1)
- 272               	.LVL13:
- 273               	.L24:
- 274               	.LM53:
- 275 017a CA01      		movw r24,r20
- 276               	.LVL14:
- 277               	/* epilogue start */
- 278 017c 0895      		ret
- 279               	.LFE10:
- 321               	.Letext0:
+ 185 00ec 01F4      		brne .L17
+ 186               	.LM33:
+ 187 00ee 84EA      		ldi r24,lo8(-92)
+ 188 00f0 8093 BC00 		sts 188,r24
+ 189               	.L20:
+ 190               	.LM34:
+ 191 00f4 8091 BC00 		lds r24,188
+ 192 00f8 87FF      		sbrs r24,7
+ 193 00fa 00C0      		rjmp .L20
+ 194               	.LM35:
+ 195 00fc 8091 B900 		lds r24,185
+ 196 0100 887F      		andi r24,lo8(-8)
+ 197 0102 8031      		cpi r24,lo8(16)
+ 198 0104 01F4      		brne .L17
+ 199               	.LM36:
+ 200 0106 81E9      		ldi r24,lo8(-111)
+ 201 0108 8093 BB00 		sts 187,r24
+ 202 010c 84E8      		ldi r24,lo8(-124)
+ 203 010e 8093 BC00 		sts 188,r24
+ 204               	.L21:
+ 205               	.LM37:
+ 206 0112 8091 BC00 		lds r24,188
+ 207 0116 87FF      		sbrs r24,7
+ 208 0118 00C0      		rjmp .L21
+ 209               	.LM38:
+ 210 011a 8091 B900 		lds r24,185
+ 211 011e 887F      		andi r24,lo8(-8)
+ 212 0120 8034      		cpi r24,lo8(64)
+ 213 0122 01F4      		brne .L17
+ 214               	.LM39:
+ 215 0124 84E8      		ldi r24,lo8(-124)
+ 216 0126 8093 BC00 		sts 188,r24
+ 217               	.L22:
+ 218               	.LM40:
+ 219 012a 8091 BC00 		lds r24,188
+ 220 012e 87FF      		sbrs r24,7
+ 221 0130 00C0      		rjmp .L22
+ 222               	.LM41:
+ 223 0132 8091 B900 		lds r24,185
+ 224 0136 887F      		andi r24,lo8(-8)
+ 225 0138 8835      		cpi r24,lo8(88)
+ 226 013a 01F4      		brne .L17
+ 227               	.LM42:
+ 228 013c 9091 BB00 		lds r25,187
+ 229               	.LVL6:
+ 230               	.LM43:
+ 231 0140 4498      		cbi 40-32,4
+ 232               	.LM44:
+ 233 0142 84EC      		ldi r24,lo8(-60)
+ 234 0144 8093 BC00 		sts 188,r24
+ 235               	.L23:
+ 236               	.LM45:
+ 237 0148 8091 BC00 		lds r24,188
+ 238 014c 87FF      		sbrs r24,7
+ 239 014e 00C0      		rjmp .L23
+ 240               	.LM46:
+ 241 0150 8091 BB00 		lds r24,187
+ 242               	.LM47:
+ 243 0154 392F      		mov r19,r25
+ 244               	.LVL7:
+ 245 0156 20E0      		ldi r18,lo8(0)
+ 246               	.LVL8:
+ 247               	.LM48:
+ 248 0158 482F      		mov r20,r24
+ 249               	.LVL9:
+ 250 015a 50E0      		ldi r21,lo8(0)
+ 251               	.LVL10:
+ 252 015c 422B      		or r20,r18
+ 253 015e 532B      		or r21,r19
+ 254               	.LVL11:
+ 255               	.LM49:
+ 256 0160 84E9      		ldi r24,lo8(-108)
+ 257 0162 8093 BC00 		sts 188,r24
+ 258 0166 00C0      		rjmp .L24
+ 259               	.LVL12:
+ 260               	.L17:
+ 261               	.LM50:
+ 262 0168 41E0      		ldi r20,lo8(1)
+ 263 016a 50E0      		ldi r21,hi8(1)
+ 264               	.LVL13:
+ 265               	.L24:
+ 266               	.LM51:
+ 267 016c CA01      		movw r24,r20
+ 268               	.LVL14:
+ 269               	/* epilogue start */
+ 270 016e 0895      		ret
+ 271               	.LFE10:
+ 313               	.Letext0:
 DEFINED SYMBOLS
                             *ABS*:00000000 iic.c
-C:\Users\ADMINI~1\AppData\Local\Temp/ccmYKad5.s:2      *ABS*:0000003f __SREG__
-C:\Users\ADMINI~1\AppData\Local\Temp/ccmYKad5.s:3      *ABS*:0000003e __SP_H__
-C:\Users\ADMINI~1\AppData\Local\Temp/ccmYKad5.s:4      *ABS*:0000003d __SP_L__
-C:\Users\ADMINI~1\AppData\Local\Temp/ccmYKad5.s:5      *ABS*:00000034 __CCP__
-C:\Users\ADMINI~1\AppData\Local\Temp/ccmYKad5.s:6      *ABS*:00000000 __tmp_reg__
-C:\Users\ADMINI~1\AppData\Local\Temp/ccmYKad5.s:7      *ABS*:00000001 __zero_reg__
-C:\Users\ADMINI~1\AppData\Local\Temp/ccmYKad5.s:18     .text:00000000 TWIInt
-C:\Users\ADMINI~1\AppData\Local\Temp/ccmYKad5.s:37     .text:00000010 I2C_Write
-C:\Users\ADMINI~1\AppData\Local\Temp/ccmYKad5.s:134    .text:00000096 I2C_Read
+C:\Users\ADMINI~1\AppData\Local\Temp/ccwE6Uqa.s:2      *ABS*:0000003f __SREG__
+C:\Users\ADMINI~1\AppData\Local\Temp/ccwE6Uqa.s:3      *ABS*:0000003e __SP_H__
+C:\Users\ADMINI~1\AppData\Local\Temp/ccwE6Uqa.s:4      *ABS*:0000003d __SP_L__
+C:\Users\ADMINI~1\AppData\Local\Temp/ccwE6Uqa.s:5      *ABS*:00000034 __CCP__
+C:\Users\ADMINI~1\AppData\Local\Temp/ccwE6Uqa.s:6      *ABS*:00000000 __tmp_reg__
+C:\Users\ADMINI~1\AppData\Local\Temp/ccwE6Uqa.s:7      *ABS*:00000001 __zero_reg__
+C:\Users\ADMINI~1\AppData\Local\Temp/ccwE6Uqa.s:18     .text:00000000 TWIInt
+C:\Users\ADMINI~1\AppData\Local\Temp/ccwE6Uqa.s:37     .text:00000010 I2C_Write
+C:\Users\ADMINI~1\AppData\Local\Temp/ccwE6Uqa.s:134    .text:00000096 I2C_Read
 
 NO UNDEFINED SYMBOLS
