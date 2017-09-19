@@ -1,0 +1,281 @@
+   1               		.file	"iic.c"
+   2               	__SREG__ = 0x3f
+   3               	__SP_H__ = 0x3e
+   4               	__SP_L__ = 0x3d
+   5               	__CCP__  = 0x34
+   6               	__tmp_reg__ = 0
+   7               	__zero_reg__ = 1
+  15               	.Ltext0:
+  16               	.global	TWIInt
+  18               	TWIInt:
+  19               	.LFB8:
+  20               	.LM1:
+  21               	/* prologue: function */
+  22               	/* frame size = 0 */
+  23               	.LM2:
+  24 0000 1092 BC00 		sts 188,__zero_reg__
+  25               	.LM3:
+  26 0004 8CE0      		ldi r24,lo8(12)
+  27 0006 8093 B800 		sts 184,r24
+  28               	.LM4:
+  29 000a 1092 B900 		sts 185,__zero_reg__
+  30               	/* epilogue start */
+  31               	.LM5:
+  32 000e 0895      		ret
+  33               	.LFE8:
+  35               	.global	I2C_Write
+  37               	I2C_Write:
+  38               	.LFB9:
+  39               	.LM6:
+  40               	.LVL0:
+  41               	/* prologue: function */
+  42               	/* frame size = 0 */
+  43 0010 982F      		mov r25,r24
+  44               	.LM7:
+  45 0012 84EA      		ldi r24,lo8(-92)
+  46               	.LVL1:
+  47 0014 8093 BC00 		sts 188,r24
+  48               	.L4:
+  49               	.LM8:
+  50 0018 8091 BC00 		lds r24,188
+  51 001c 87FF      		sbrs r24,7
+  52 001e 00C0      		rjmp .L4
+  53               	.LM9:
+  54 0020 8091 B900 		lds r24,185
+  55 0024 887F      		andi r24,lo8(-8)
+  56 0026 8830      		cpi r24,lo8(8)
+  57 0028 01F4      		brne .L5
+  58               	.LM10:
+  59 002a 80E9      		ldi r24,lo8(-112)
+  60 002c 8093 BB00 		sts 187,r24
+  61 0030 84E8      		ldi r24,lo8(-124)
+  62 0032 8093 BC00 		sts 188,r24
+  63               	.L6:
+  64               	.LM11:
+  65 0036 8091 BC00 		lds r24,188
+  66 003a 87FF      		sbrs r24,7
+  67 003c 00C0      		rjmp .L6
+  68               	.LM12:
+  69 003e 8091 B900 		lds r24,185
+  70 0042 887F      		andi r24,lo8(-8)
+  71 0044 8831      		cpi r24,lo8(24)
+  72 0046 01F4      		brne .L5
+  73               	.LM13:
+  74 0048 6093 BB00 		sts 187,r22
+  75 004c 84E8      		ldi r24,lo8(-124)
+  76 004e 8093 BC00 		sts 188,r24
+  77               	.L7:
+  78               	.LM14:
+  79 0052 8091 BC00 		lds r24,188
+  80 0056 87FF      		sbrs r24,7
+  81 0058 00C0      		rjmp .L7
+  82               	.LM15:
+  83 005a 8091 B900 		lds r24,185
+  84 005e 887F      		andi r24,lo8(-8)
+  85 0060 8832      		cpi r24,lo8(40)
+  86 0062 01F4      		brne .L5
+  87               	.LM16:
+  88 0064 9093 BB00 		sts 187,r25
+  89 0068 84E8      		ldi r24,lo8(-124)
+  90 006a 8093 BC00 		sts 188,r24
+  91               	.L8:
+  92               	.LM17:
+  93 006e 8091 BC00 		lds r24,188
+  94 0072 87FF      		sbrs r24,7
+  95 0074 00C0      		rjmp .L8
+  96               	.LM18:
+  97 0076 8091 B900 		lds r24,185
+  98 007a 887F      		andi r24,lo8(-8)
+  99 007c 8832      		cpi r24,lo8(40)
+ 100 007e 01F4      		brne .L5
+ 101               	.LM19:
+ 102 0080 84E9      		ldi r24,lo8(-108)
+ 103 0082 8093 BC00 		sts 188,r24
+ 104               	.LBB12:
+ 105               	.LBB13:
+ 106               	.LBB14:
+ 107               	.LBB15:
+ 108               	.LM20:
+ 109 0086 80E2      		ldi r24,lo8(20000)
+ 110 0088 9EE4      		ldi r25,hi8(20000)
+ 111               	.LVL2:
+ 112               	/* #APP */
+ 113               	 ;  105 "c:/winavr-20100110/lib/gcc/../../avr/include/util/delay_basic.h" 1
+ 114 008a 0197      		1: sbiw r24,1
+ 115 008c 01F4      		brne 1b
+ 116               	 ;  0 "" 2
+ 117               	/* #NOAPP */
+ 118 008e 80E0      		ldi r24,lo8(0)
+ 119               	.LVL3:
+ 120 0090 0895      		ret
+ 121               	.L5:
+ 122               	.LM21:
+ 123 0092 81E0      		ldi r24,lo8(1)
+ 124               	.LBE15:
+ 125               	.LBE14:
+ 126               	.LBE13:
+ 127               	.LBE12:
+ 128               	.LM22:
+ 129 0094 0895      		ret
+ 130               	.LFE9:
+ 132               	.global	I2C_Read
+ 134               	I2C_Read:
+ 135               	.LFB10:
+ 136               	.LM23:
+ 137               	.LVL4:
+ 138               	/* prologue: function */
+ 139               	/* frame size = 0 */
+ 140 0096 982F      		mov r25,r24
+ 141               	.LM24:
+ 142 0098 84EA      		ldi r24,lo8(-92)
+ 143               	.LVL5:
+ 144 009a 8093 BC00 		sts 188,r24
+ 145               	.L16:
+ 146               	.LM25:
+ 147 009e 8091 BC00 		lds r24,188
+ 148 00a2 87FF      		sbrs r24,7
+ 149 00a4 00C0      		rjmp .L16
+ 150               	.LM26:
+ 151 00a6 8091 B900 		lds r24,185
+ 152 00aa 887F      		andi r24,lo8(-8)
+ 153 00ac 8830      		cpi r24,lo8(8)
+ 154 00ae 01F0      		breq .+2
+ 155 00b0 00C0      		rjmp .L17
+ 156               	.LM27:
+ 157 00b2 80E9      		ldi r24,lo8(-112)
+ 158 00b4 8093 BB00 		sts 187,r24
+ 159 00b8 84E8      		ldi r24,lo8(-124)
+ 160 00ba 8093 BC00 		sts 188,r24
+ 161               	.L18:
+ 162               	.LM28:
+ 163 00be 8091 BC00 		lds r24,188
+ 164 00c2 87FF      		sbrs r24,7
+ 165 00c4 00C0      		rjmp .L18
+ 166               	.LM29:
+ 167 00c6 8091 B900 		lds r24,185
+ 168 00ca 887F      		andi r24,lo8(-8)
+ 169 00cc 8831      		cpi r24,lo8(24)
+ 170 00ce 01F0      		breq .+2
+ 171 00d0 00C0      		rjmp .L17
+ 172               	.LM30:
+ 173 00d2 9093 BB00 		sts 187,r25
+ 174 00d6 84E8      		ldi r24,lo8(-124)
+ 175 00d8 8093 BC00 		sts 188,r24
+ 176               	.L19:
+ 177               	.LM31:
+ 178 00dc 8091 BC00 		lds r24,188
+ 179 00e0 87FF      		sbrs r24,7
+ 180 00e2 00C0      		rjmp .L19
+ 181               	.LM32:
+ 182 00e4 8091 B900 		lds r24,185
+ 183 00e8 887F      		andi r24,lo8(-8)
+ 184 00ea 8832      		cpi r24,lo8(40)
+ 185 00ec 01F0      		breq .+2
+ 186 00ee 00C0      		rjmp .L17
+ 187               	.LM33:
+ 188 00f0 84EA      		ldi r24,lo8(-92)
+ 189 00f2 8093 BC00 		sts 188,r24
+ 190               	.L20:
+ 191               	.LM34:
+ 192 00f6 8091 BC00 		lds r24,188
+ 193 00fa 87FF      		sbrs r24,7
+ 194 00fc 00C0      		rjmp .L20
+ 195               	.LM35:
+ 196 00fe 8091 B900 		lds r24,185
+ 197 0102 887F      		andi r24,lo8(-8)
+ 198 0104 8031      		cpi r24,lo8(16)
+ 199 0106 01F4      		brne .L17
+ 200               	.LM36:
+ 201 0108 81E9      		ldi r24,lo8(-111)
+ 202 010a 8093 BB00 		sts 187,r24
+ 203 010e 84E8      		ldi r24,lo8(-124)
+ 204 0110 8093 BC00 		sts 188,r24
+ 205               	.L21:
+ 206               	.LM37:
+ 207 0114 8091 BC00 		lds r24,188
+ 208 0118 87FF      		sbrs r24,7
+ 209 011a 00C0      		rjmp .L21
+ 210               	.LM38:
+ 211 011c 8091 B900 		lds r24,185
+ 212 0120 887F      		andi r24,lo8(-8)
+ 213 0122 8034      		cpi r24,lo8(64)
+ 214 0124 01F4      		brne .L17
+ 215               	.LM39:
+ 216 0126 84E8      		ldi r24,lo8(-124)
+ 217 0128 8093 BC00 		sts 188,r24
+ 218               	.L22:
+ 219               	.LM40:
+ 220 012c 8091 BC00 		lds r24,188
+ 221 0130 87FF      		sbrs r24,7
+ 222 0132 00C0      		rjmp .L22
+ 223               	.LM41:
+ 224 0134 8091 B900 		lds r24,185
+ 225 0138 887F      		andi r24,lo8(-8)
+ 226 013a 8835      		cpi r24,lo8(88)
+ 227 013c 01F4      		brne .L17
+ 228               	.LM42:
+ 229 013e 9091 BB00 		lds r25,187
+ 230               	.LVL6:
+ 231               	.LM43:
+ 232 0142 84E8      		ldi r24,lo8(-124)
+ 233 0144 8093 BC00 		sts 188,r24
+ 234               	.L23:
+ 235               	.LM44:
+ 236 0148 8091 BC00 		lds r24,188
+ 237 014c 87FF      		sbrs r24,7
+ 238 014e 00C0      		rjmp .L23
+ 239               	.LM45:
+ 240 0150 8091 B900 		lds r24,185
+ 241 0154 887F      		andi r24,lo8(-8)
+ 242 0156 8835      		cpi r24,lo8(88)
+ 243 0158 01F4      		brne .L17
+ 244               	.LM46:
+ 245 015a 3C9A      		sbi 39-32,4
+ 246               	.LM47:
+ 247 015c 4498      		cbi 40-32,4
+ 248               	.LM48:
+ 249 015e 8091 BB00 		lds r24,187
+ 250               	.LM49:
+ 251 0162 392F      		mov r19,r25
+ 252               	.LVL7:
+ 253 0164 20E0      		ldi r18,lo8(0)
+ 254               	.LVL8:
+ 255               	.LM50:
+ 256 0166 482F      		mov r20,r24
+ 257               	.LVL9:
+ 258 0168 50E0      		ldi r21,lo8(0)
+ 259               	.LVL10:
+ 260 016a 422B      		or r20,r18
+ 261 016c 532B      		or r21,r19
+ 262               	.LVL11:
+ 263               	.LM51:
+ 264 016e 84E9      		ldi r24,lo8(-108)
+ 265 0170 8093 BC00 		sts 188,r24
+ 266 0174 00C0      		rjmp .L24
+ 267               	.LVL12:
+ 268               	.L17:
+ 269               	.LM52:
+ 270 0176 41E0      		ldi r20,lo8(1)
+ 271 0178 50E0      		ldi r21,hi8(1)
+ 272               	.LVL13:
+ 273               	.L24:
+ 274               	.LM53:
+ 275 017a CA01      		movw r24,r20
+ 276               	.LVL14:
+ 277               	/* epilogue start */
+ 278 017c 0895      		ret
+ 279               	.LFE10:
+ 321               	.Letext0:
+DEFINED SYMBOLS
+                            *ABS*:00000000 iic.c
+C:\Users\ADMINI~1\AppData\Local\Temp/ccmYKad5.s:2      *ABS*:0000003f __SREG__
+C:\Users\ADMINI~1\AppData\Local\Temp/ccmYKad5.s:3      *ABS*:0000003e __SP_H__
+C:\Users\ADMINI~1\AppData\Local\Temp/ccmYKad5.s:4      *ABS*:0000003d __SP_L__
+C:\Users\ADMINI~1\AppData\Local\Temp/ccmYKad5.s:5      *ABS*:00000034 __CCP__
+C:\Users\ADMINI~1\AppData\Local\Temp/ccmYKad5.s:6      *ABS*:00000000 __tmp_reg__
+C:\Users\ADMINI~1\AppData\Local\Temp/ccmYKad5.s:7      *ABS*:00000001 __zero_reg__
+C:\Users\ADMINI~1\AppData\Local\Temp/ccmYKad5.s:18     .text:00000000 TWIInt
+C:\Users\ADMINI~1\AppData\Local\Temp/ccmYKad5.s:37     .text:00000010 I2C_Write
+C:\Users\ADMINI~1\AppData\Local\Temp/ccmYKad5.s:134    .text:00000096 I2C_Read
+
+NO UNDEFINED SYMBOLS
