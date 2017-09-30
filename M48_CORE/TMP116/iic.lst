@@ -15,7 +15,7 @@
   23               	.LM2:
   24 0000 1092 BC00 		sts 188,__zero_reg__
   25               	.LM3:
-  26 0004 80EC      		ldi r24,lo8(-64)
+  26 0004 80E2      		ldi r24,lo8(32)
   27 0006 8093 B800 		sts 184,r24
   28               	.LM4:
   29 000a 1092 B900 		sts 185,__zero_reg__
@@ -216,58 +216,56 @@
  228 013c 9091 BB00 		lds r25,187
  229               	.LVL6:
  230               	.LM43:
- 231 0140 4498      		cbi 40-32,4
- 232               	.LM44:
- 233 0142 84EC      		ldi r24,lo8(-60)
- 234 0144 8093 BC00 		sts 188,r24
- 235               	.L23:
- 236               	.LM45:
- 237 0148 8091 BC00 		lds r24,188
- 238 014c 87FF      		sbrs r24,7
- 239 014e 00C0      		rjmp .L23
+ 231 0140 84E8      		ldi r24,lo8(-124)
+ 232 0142 8093 BC00 		sts 188,r24
+ 233               	.L23:
+ 234               	.LM44:
+ 235 0146 8091 BC00 		lds r24,188
+ 236 014a 87FF      		sbrs r24,7
+ 237 014c 00C0      		rjmp .L23
+ 238               	.LM45:
+ 239 014e 8091 BB00 		lds r24,187
  240               	.LM46:
- 241 0150 8091 BB00 		lds r24,187
- 242               	.LM47:
- 243 0154 392F      		mov r19,r25
- 244               	.LVL7:
- 245 0156 20E0      		ldi r18,lo8(0)
- 246               	.LVL8:
- 247               	.LM48:
- 248 0158 482F      		mov r20,r24
- 249               	.LVL9:
- 250 015a 50E0      		ldi r21,lo8(0)
- 251               	.LVL10:
- 252 015c 422B      		or r20,r18
- 253 015e 532B      		or r21,r19
- 254               	.LVL11:
- 255               	.LM49:
- 256 0160 84E9      		ldi r24,lo8(-108)
- 257 0162 8093 BC00 		sts 188,r24
- 258 0166 00C0      		rjmp .L24
- 259               	.LVL12:
- 260               	.L17:
- 261               	.LM50:
- 262 0168 41E0      		ldi r20,lo8(1)
- 263 016a 50E0      		ldi r21,hi8(1)
- 264               	.LVL13:
- 265               	.L24:
- 266               	.LM51:
- 267 016c CA01      		movw r24,r20
- 268               	.LVL14:
- 269               	/* epilogue start */
- 270 016e 0895      		ret
- 271               	.LFE10:
- 313               	.Letext0:
+ 241 0152 392F      		mov r19,r25
+ 242               	.LVL7:
+ 243 0154 20E0      		ldi r18,lo8(0)
+ 244               	.LVL8:
+ 245               	.LM47:
+ 246 0156 482F      		mov r20,r24
+ 247               	.LVL9:
+ 248 0158 50E0      		ldi r21,lo8(0)
+ 249               	.LVL10:
+ 250 015a 422B      		or r20,r18
+ 251 015c 532B      		or r21,r19
+ 252               	.LVL11:
+ 253               	.LM48:
+ 254 015e 84E9      		ldi r24,lo8(-108)
+ 255 0160 8093 BC00 		sts 188,r24
+ 256 0164 00C0      		rjmp .L24
+ 257               	.LVL12:
+ 258               	.L17:
+ 259               	.LM49:
+ 260 0166 41E0      		ldi r20,lo8(1)
+ 261 0168 50E0      		ldi r21,hi8(1)
+ 262               	.LVL13:
+ 263               	.L24:
+ 264               	.LM50:
+ 265 016a CA01      		movw r24,r20
+ 266               	.LVL14:
+ 267               	/* epilogue start */
+ 268 016c 0895      		ret
+ 269               	.LFE10:
+ 311               	.Letext0:
 DEFINED SYMBOLS
                             *ABS*:00000000 iic.c
-C:\Users\ADMINI~1\AppData\Local\Temp/ccwE6Uqa.s:2      *ABS*:0000003f __SREG__
-C:\Users\ADMINI~1\AppData\Local\Temp/ccwE6Uqa.s:3      *ABS*:0000003e __SP_H__
-C:\Users\ADMINI~1\AppData\Local\Temp/ccwE6Uqa.s:4      *ABS*:0000003d __SP_L__
-C:\Users\ADMINI~1\AppData\Local\Temp/ccwE6Uqa.s:5      *ABS*:00000034 __CCP__
-C:\Users\ADMINI~1\AppData\Local\Temp/ccwE6Uqa.s:6      *ABS*:00000000 __tmp_reg__
-C:\Users\ADMINI~1\AppData\Local\Temp/ccwE6Uqa.s:7      *ABS*:00000001 __zero_reg__
-C:\Users\ADMINI~1\AppData\Local\Temp/ccwE6Uqa.s:18     .text:00000000 TWIInt
-C:\Users\ADMINI~1\AppData\Local\Temp/ccwE6Uqa.s:37     .text:00000010 I2C_Write
-C:\Users\ADMINI~1\AppData\Local\Temp/ccwE6Uqa.s:134    .text:00000096 I2C_Read
+C:\Users\ADMINI~1\AppData\Local\Temp/cc1jD3Kg.s:2      *ABS*:0000003f __SREG__
+C:\Users\ADMINI~1\AppData\Local\Temp/cc1jD3Kg.s:3      *ABS*:0000003e __SP_H__
+C:\Users\ADMINI~1\AppData\Local\Temp/cc1jD3Kg.s:4      *ABS*:0000003d __SP_L__
+C:\Users\ADMINI~1\AppData\Local\Temp/cc1jD3Kg.s:5      *ABS*:00000034 __CCP__
+C:\Users\ADMINI~1\AppData\Local\Temp/cc1jD3Kg.s:6      *ABS*:00000000 __tmp_reg__
+C:\Users\ADMINI~1\AppData\Local\Temp/cc1jD3Kg.s:7      *ABS*:00000001 __zero_reg__
+C:\Users\ADMINI~1\AppData\Local\Temp/cc1jD3Kg.s:18     .text:00000000 TWIInt
+C:\Users\ADMINI~1\AppData\Local\Temp/cc1jD3Kg.s:37     .text:00000010 I2C_Write
+C:\Users\ADMINI~1\AppData\Local\Temp/cc1jD3Kg.s:134    .text:00000096 I2C_Read
 
 NO UNDEFINED SYMBOLS

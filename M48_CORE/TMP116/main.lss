@@ -3,27 +3,27 @@ main.elf:     file format elf32-avr
 
 Sections:
 Idx Name          Size      VMA       LMA       File off  Algn
-  0 .data         00000004  00800100  000003ee  00000462  2**0
+  0 .data         00000004  00800100  0000043a  000004ae  2**0
                   CONTENTS, ALLOC, LOAD, DATA
-  1 .text         000003ee  00000000  00000000  00000074  2**1
+  1 .text         0000043a  00000000  00000000  00000074  2**1
                   CONTENTS, ALLOC, LOAD, READONLY, CODE
-  2 .debug_aranges 00000040  00000000  00000000  00000466  2**0
+  2 .debug_aranges 00000040  00000000  00000000  000004b2  2**0
                   CONTENTS, READONLY, DEBUGGING
-  3 .debug_pubnames 000000db  00000000  00000000  000004a6  2**0
+  3 .debug_pubnames 000000db  00000000  00000000  000004f2  2**0
                   CONTENTS, READONLY, DEBUGGING
-  4 .debug_info   00000854  00000000  00000000  00000581  2**0
+  4 .debug_info   00000a2f  00000000  00000000  000005cd  2**0
                   CONTENTS, READONLY, DEBUGGING
-  5 .debug_abbrev 000002c1  00000000  00000000  00000dd5  2**0
+  5 .debug_abbrev 000002c1  00000000  00000000  00000ffc  2**0
                   CONTENTS, READONLY, DEBUGGING
-  6 .debug_line   000007d2  00000000  00000000  00001096  2**0
+  6 .debug_line   000008c5  00000000  00000000  000012bd  2**0
                   CONTENTS, READONLY, DEBUGGING
-  7 .debug_frame  000000f0  00000000  00000000  00001868  2**2
+  7 .debug_frame  000000f0  00000000  00000000  00001b84  2**2
                   CONTENTS, READONLY, DEBUGGING
-  8 .debug_str    00000179  00000000  00000000  00001958  2**0
+  8 .debug_str    00000179  00000000  00000000  00001c74  2**0
                   CONTENTS, READONLY, DEBUGGING
-  9 .debug_loc    0000035d  00000000  00000000  00001ad1  2**0
+  9 .debug_loc    0000041b  00000000  00000000  00001ded  2**0
                   CONTENTS, READONLY, DEBUGGING
- 10 .debug_ranges 000001f8  00000000  00000000  00001e2e  2**0
+ 10 .debug_ranges 00000288  00000000  00000000  00002208  2**0
                   CONTENTS, READONLY, DEBUGGING
 
 Disassembly of section .text:
@@ -68,8 +68,8 @@ Disassembly of section .text:
   40:	11 e0       	ldi	r17, 0x01	; 1
   42:	a0 e0       	ldi	r26, 0x00	; 0
   44:	b1 e0       	ldi	r27, 0x01	; 1
-  46:	ee ee       	ldi	r30, 0xEE	; 238
-  48:	f3 e0       	ldi	r31, 0x03	; 3
+  46:	ea e3       	ldi	r30, 0x3A	; 58
+  48:	f4 e0       	ldi	r31, 0x04	; 4
   4a:	02 c0       	rjmp	.+4      	; 0x50 <.do_copy_data_start>
 
 0000004c <.do_copy_data_loop>:
@@ -80,8 +80,8 @@ Disassembly of section .text:
   50:	a4 30       	cpi	r26, 0x04	; 4
   52:	b1 07       	cpc	r27, r17
   54:	d9 f7       	brne	.-10     	; 0x4c <.do_copy_data_loop>
-  56:	8e d1       	rcall	.+796    	; 0x374 <main>
-  58:	c8 c1       	rjmp	.+912    	; 0x3ea <_exit>
+  56:	b6 d1       	rcall	.+876    	; 0x3c4 <main>
+  58:	ee c1       	rjmp	.+988    	; 0x436 <_exit>
 
 0000005a <__bad_interrupt>:
   5a:	d2 cf       	rjmp	.-92     	; 0x0 <__vectors>
@@ -95,7 +95,7 @@ void TWIInt(void)
     TWCR = 0x00;
   5c:	10 92 bc 00 	sts	0x00BC, r1
     TWBR = TWBR_SET;	// set speed
-  60:	80 ec       	ldi	r24, 0xC0	; 192
+  60:	80 e2       	ldi	r24, 0x20	; 32
   62:	80 93 b8 00 	sts	0x00B8, r24
     TWSR = 0x00;
   66:	10 92 b9 00 	sts	0x00B9, r1
@@ -209,7 +209,7 @@ unsigned int I2C_Read(unsigned RegAddress)
  106:	88 7f       	andi	r24, 0xF8	; 248
  108:	88 30       	cpi	r24, 0x08	; 8
  10a:	09 f0       	breq	.+2      	; 0x10e <I2C_Read+0x1c>
- 10c:	5b c0       	rjmp	.+182    	; 0x1c4 <I2C_Read+0xd2>
+ 10c:	5a c0       	rjmp	.+180    	; 0x1c2 <I2C_Read+0xd0>
 		return 1;
 	Write8Bit(WD_DEVICE_ADDR); 	// 写I2C从器件地址和写方式
  10e:	80 e9       	ldi	r24, 0x90	; 144
@@ -225,7 +225,7 @@ unsigned int I2C_Read(unsigned RegAddress)
  126:	88 7f       	andi	r24, 0xF8	; 248
  128:	88 31       	cpi	r24, 0x18	; 24
  12a:	09 f0       	breq	.+2      	; 0x12e <I2C_Read+0x3c>
- 12c:	4b c0       	rjmp	.+150    	; 0x1c4 <I2C_Read+0xd2>
+ 12c:	4a c0       	rjmp	.+148    	; 0x1c2 <I2C_Read+0xd0>
 		return 1;
 	
 	Write8Bit(RegAddress); 	// 写器件相应寄存器地址
@@ -240,7 +240,7 @@ unsigned int I2C_Read(unsigned RegAddress)
  140:	80 91 b9 00 	lds	r24, 0x00B9
  144:	88 7f       	andi	r24, 0xF8	; 248
  146:	88 32       	cpi	r24, 0x28	; 40
- 148:	e9 f5       	brne	.+122    	; 0x1c4 <I2C_Read+0xd2>
+ 148:	e1 f5       	brne	.+120    	; 0x1c2 <I2C_Read+0xd0>
 		return 1;
 
 	Start(); 		// I2C重新启动
@@ -254,7 +254,7 @@ unsigned int I2C_Read(unsigned RegAddress)
  158:	80 91 b9 00 	lds	r24, 0x00B9
  15c:	88 7f       	andi	r24, 0xF8	; 248
  15e:	80 31       	cpi	r24, 0x10	; 16
- 160:	89 f5       	brne	.+98     	; 0x1c4 <I2C_Read+0xd2>
+ 160:	81 f5       	brne	.+96     	; 0x1c2 <I2C_Read+0xd0>
 		return 1;
 	Write8Bit(RD_DEVICE_ADDR); // 写I2C从器件地址和读方式
  162:	81 e9       	ldi	r24, 0x91	; 145
@@ -269,9 +269,8 @@ unsigned int I2C_Read(unsigned RegAddress)
  176:	80 91 b9 00 	lds	r24, 0x00B9
  17a:	88 7f       	andi	r24, 0xF8	; 248
  17c:	80 34       	cpi	r24, 0x40	; 64
- 17e:	11 f5       	brne	.+68     	; 0x1c4 <I2C_Read+0xd2>
+ 17e:	09 f5       	brne	.+66     	; 0x1c2 <I2C_Read+0xd0>
 		return 1;
-
 
 	Twi(); 			// 启动主I2C读方式
  180:	84 e8       	ldi	r24, 0x84	; 132
@@ -284,620 +283,677 @@ unsigned int I2C_Read(unsigned RegAddress)
  18e:	80 91 b9 00 	lds	r24, 0x00B9
  192:	88 7f       	andi	r24, 0xF8	; 248
  194:	88 35       	cpi	r24, 0x58	; 88
- 196:	b1 f4       	brne	.+44     	; 0x1c4 <I2C_Read+0xd2>
+ 196:	a9 f4       	brne	.+42     	; 0x1c2 <I2C_Read+0xd0>
 		return 1; 
 	temp = TWDR;		// 读取I2C接收数据
  198:	90 91 bb 00 	lds	r25, 0x00BB
 	temp <<= 8;
-	SDA_116_L;
- 19c:	44 98       	cbi	0x08, 4	; 8
-	TWCR = TW_ACK;
- 19e:	84 ec       	ldi	r24, 0xC4	; 196
- 1a0:	80 93 bc 00 	sts	0x00BC, r24
+	
+	Twi(); 			// 启动主I2C读方式
+ 19c:	84 e8       	ldi	r24, 0x84	; 132
+ 19e:	80 93 bc 00 	sts	0x00BC, r24
 	Wait();
- 1a4:	80 91 bc 00 	lds	r24, 0x00BC
- 1a8:	87 ff       	sbrs	r24, 7
- 1aa:	fc cf       	rjmp	.-8      	; 0x1a4 <I2C_Read+0xb2>
+ 1a2:	80 91 bc 00 	lds	r24, 0x00BC
+ 1a6:	87 ff       	sbrs	r24, 7
+ 1a8:	fc cf       	rjmp	.-8      	; 0x1a2 <I2C_Read+0xb0>
 	temp |= TWDR;		// 读取I2C接收数据
- 1ac:	80 91 bb 00 	lds	r24, 0x00BB
+ 1aa:	80 91 bb 00 	lds	r24, 0x00BB
 	Twi(); 			// 启动主I2C读方式
 	Wait();
 	if(TestAck() != MR_DATA_NOACK) 
 		return 1; 
 	temp = TWDR;		// 读取I2C接收数据
 	temp <<= 8;
- 1b0:	39 2f       	mov	r19, r25
- 1b2:	20 e0       	ldi	r18, 0x00	; 0
-	SDA_116_L;
-	TWCR = TW_ACK;
+ 1ae:	39 2f       	mov	r19, r25
+ 1b0:	20 e0       	ldi	r18, 0x00	; 0
+	
+	Twi(); 			// 启动主I2C读方式
 	Wait();
 	temp |= TWDR;		// 读取I2C接收数据
- 1b4:	48 2f       	mov	r20, r24
- 1b6:	50 e0       	ldi	r21, 0x00	; 0
- 1b8:	42 2b       	or	r20, r18
- 1ba:	53 2b       	or	r21, r19
-	
-	TWCR |= 0x04;
-	while(!(TWCR&(1<<TWINT)));
-	temp += TWDR;
-	*/
+ 1b2:	48 2f       	mov	r20, r24
+ 1b4:	50 e0       	ldi	r21, 0x00	; 0
+ 1b6:	42 2b       	or	r20, r18
+ 1b8:	53 2b       	or	r21, r19
 	Stop();
- 1bc:	84 e9       	ldi	r24, 0x94	; 148
- 1be:	80 93 bc 00 	sts	0x00BC, r24
- 1c2:	02 c0       	rjmp	.+4      	; 0x1c8 <I2C_Read+0xd6>
+ 1ba:	84 e9       	ldi	r24, 0x94	; 148
+ 1bc:	80 93 bc 00 	sts	0x00BC, r24
+ 1c0:	02 c0       	rjmp	.+4      	; 0x1c6 <I2C_Read+0xd4>
 	
 	return temp;
- 1c4:	41 e0       	ldi	r20, 0x01	; 1
- 1c6:	50 e0       	ldi	r21, 0x00	; 0
+ 1c2:	41 e0       	ldi	r20, 0x01	; 1
+ 1c4:	50 e0       	ldi	r21, 0x00	; 0
 }
- 1c8:	ca 01       	movw	r24, r20
- 1ca:	08 95       	ret
+ 1c6:	ca 01       	movw	r24, r20
+ 1c8:	08 95       	ret
 
-000001cc <PortInit>:
-#define TMP116_R_ADDR	0x90
+000001ca <PortInit>:
+#define TMP116_R_ADDR	0x91
 
 
 void PortInit(void)
 {
     DDRB = 0B00000000;
- 1cc:	14 b8       	out	0x04, r1	; 4
+ 1ca:	14 b8       	out	0x04, r1	; 4
     PORTB= 0B00000000;
- 1ce:	15 b8       	out	0x05, r1	; 5
+ 1cc:	15 b8       	out	0x05, r1	; 5
     PINB = 0x00;
- 1d0:	13 b8       	out	0x03, r1	; 3
+ 1ce:	13 b8       	out	0x03, r1	; 3
 
     DDRD = 0B01111100;		// PD5->RES	PD6->D/C PD7->BUSY PD4->SDI PD3->CS PD2->CLK
- 1d2:	8c e7       	ldi	r24, 0x7C	; 124
- 1d4:	8a b9       	out	0x0a, r24	; 10
+ 1d0:	8c e7       	ldi	r24, 0x7C	; 124
+ 1d2:	8a b9       	out	0x0a, r24	; 10
     PORTD= 0B00000000;
- 1d6:	1b b8       	out	0x0b, r1	; 11
+ 1d4:	1b b8       	out	0x0b, r1	; 11
     PIND = 0x00;
- 1d8:	19 b8       	out	0x09, r1	; 9
+ 1d6:	19 b8       	out	0x09, r1	; 9
 
-    DDRC = 0B00101111;
- 1da:	8f e2       	ldi	r24, 0x2F	; 47
- 1dc:	87 b9       	out	0x07, r24	; 7
+    DDRC = 0B00111111;
+ 1d8:	8f e3       	ldi	r24, 0x3F	; 63
+ 1da:	87 b9       	out	0x07, r24	; 7
     PORTC= 0B00110000;
- 1de:	80 e3       	ldi	r24, 0x30	; 48
- 1e0:	88 b9       	out	0x08, r24	; 8
+ 1dc:	80 e3       	ldi	r24, 0x30	; 48
+ 1de:	88 b9       	out	0x08, r24	; 8
     PINC = 0x00;
- 1e2:	16 b8       	out	0x06, r1	; 6
+ 1e0:	16 b8       	out	0x06, r1	; 6
 }
- 1e4:	08 95       	ret
+ 1e2:	08 95       	ret
 
-000001e6 <TWI_WriteByte>:
+000001e4 <TWI_ReadByte>:
 
-void TWI_WriteByte(unsigned char src)
+unsigned char TWI_ReadByte(void)
 {
-    unsigned char i;
-    SDA_116_OUT;
- 1e6:	3c 9a       	sbi	0x07, 4	; 7
- 1e8:	20 e0       	ldi	r18, 0x00	; 0
+    unsigned char i, tmp=0;
+    SDA_116_IN;
+ 1e4:	3c 98       	cbi	0x07, 4	; 7
+ 1e6:	20 e0       	ldi	r18, 0x00	; 0
+ 1e8:	80 e0       	ldi	r24, 0x00	; 0
     can be achieved.
 */
 void
 _delay_loop_1(uint8_t __count)
 {
 	__asm__ volatile (
- 1ea:	45 e0       	ldi	r20, 0x05	; 5
+ 1ea:	48 e0       	ldi	r20, 0x08	; 8
+    for (i = 0; i < 8; i++)
+    {
+		SCL_116_H;
+ 1ec:	3a e0       	ldi	r19, 0x0A	; 10
+ 1ee:	45 9a       	sbi	0x08, 5	; 8
+		asm("nop");
+ 1f0:	00 00       	nop
+		asm("nop");
+ 1f2:	00 00       	nop
+		if(SDA_116_HL)
+ 1f4:	34 9b       	sbis	0x06, 4	; 6
+ 1f6:	03 c0       	rjmp	.+6      	; 0x1fe <TWI_ReadByte+0x1a>
+            tmp = (tmp << 1) | 0x01;
+ 1f8:	88 0f       	add	r24, r24
+ 1fa:	81 60       	ori	r24, 0x01	; 1
+ 1fc:	01 c0       	rjmp	.+2      	; 0x200 <TWI_ReadByte+0x1c>
+        else
+            tmp = tmp << 1;
+ 1fe:	88 0f       	add	r24, r24
+ 200:	94 2f       	mov	r25, r20
+ 202:	9a 95       	dec	r25
+ 204:	f1 f7       	brne	.-4      	; 0x202 <TWI_ReadByte+0x1e>
+		_delay_us(3);
+        SCL_116_L;
+ 206:	45 98       	cbi	0x08, 5	; 8
+ 208:	93 2f       	mov	r25, r19
+ 20a:	9a 95       	dec	r25
+ 20c:	f1 f7       	brne	.-4      	; 0x20a <TWI_ReadByte+0x26>
+
+unsigned char TWI_ReadByte(void)
+{
+    unsigned char i, tmp=0;
+    SDA_116_IN;
+    for (i = 0; i < 8; i++)
+ 20e:	2f 5f       	subi	r18, 0xFF	; 255
+ 210:	28 30       	cpi	r18, 0x08	; 8
+ 212:	69 f7       	brne	.-38     	; 0x1ee <TWI_ReadByte+0xa>
+		_delay_us(3);
+        SCL_116_L;
+		_delay_us(4);
+    }
+    return tmp;
+}
+ 214:	08 95       	ret
+
+00000216 <TWI_WriteByte>:
+
+
+void TWI_WriteByte(unsigned char src)
+{
+    unsigned char i;
+    SDA_116_OUT;
+ 216:	3c 9a       	sbi	0x07, 4	; 7
+ 218:	20 e0       	ldi	r18, 0x00	; 0
+ 21a:	4a e0       	ldi	r20, 0x0A	; 10
     for (i = 0; i < 8; i++)
     {
         if (src & 0x80)
- 1ec:	32 e0       	ldi	r19, 0x02	; 2
- 1ee:	87 ff       	sbrs	r24, 7
- 1f0:	02 c0       	rjmp	.+4      	; 0x1f6 <TWI_WriteByte+0x10>
+ 21c:	38 e0       	ldi	r19, 0x08	; 8
+ 21e:	87 ff       	sbrs	r24, 7
+ 220:	02 c0       	rjmp	.+4      	; 0x226 <TWI_WriteByte+0x10>
             SDA_116_H;
- 1f2:	44 9a       	sbi	0x08, 4	; 8
- 1f4:	01 c0       	rjmp	.+2      	; 0x1f8 <TWI_WriteByte+0x12>
+ 222:	44 9a       	sbi	0x08, 4	; 8
+ 224:	01 c0       	rjmp	.+2      	; 0x228 <TWI_WriteByte+0x12>
         else
             SDA_116_L;
- 1f6:	44 98       	cbi	0x08, 4	; 8
+ 226:	44 98       	cbi	0x08, 4	; 8
         SCL_116_H;
- 1f8:	45 9a       	sbi	0x08, 5	; 8
- 1fa:	94 2f       	mov	r25, r20
- 1fc:	9a 95       	dec	r25
- 1fe:	f1 f7       	brne	.-4      	; 0x1fc <TWI_WriteByte+0x16>
-        _delay_us(2);
+ 228:	45 9a       	sbi	0x08, 5	; 8
+ 22a:	94 2f       	mov	r25, r20
+ 22c:	9a 95       	dec	r25
+ 22e:	f1 f7       	brne	.-4      	; 0x22c <TWI_WriteByte+0x16>
+        _delay_us(4);
         SCL_116_L;
- 200:	45 98       	cbi	0x08, 5	; 8
- 202:	93 2f       	mov	r25, r19
- 204:	9a 95       	dec	r25
- 206:	f1 f7       	brne	.-4      	; 0x204 <TWI_WriteByte+0x1e>
+ 230:	45 98       	cbi	0x08, 5	; 8
+ 232:	93 2f       	mov	r25, r19
+ 234:	9a 95       	dec	r25
+ 236:	f1 f7       	brne	.-4      	; 0x234 <TWI_WriteByte+0x1e>
 
 void TWI_WriteByte(unsigned char src)
 {
     unsigned char i;
     SDA_116_OUT;
     for (i = 0; i < 8; i++)
- 208:	2f 5f       	subi	r18, 0xFF	; 255
- 20a:	28 30       	cpi	r18, 0x08	; 8
- 20c:	11 f0       	breq	.+4      	; 0x212 <TWI_WriteByte+0x2c>
+ 238:	2f 5f       	subi	r18, 0xFF	; 255
+ 23a:	28 30       	cpi	r18, 0x08	; 8
+ 23c:	11 f0       	breq	.+4      	; 0x242 <TWI_WriteByte+0x2c>
             SDA_116_L;
         SCL_116_H;
-        _delay_us(2);
+        _delay_us(4);
         SCL_116_L;
-		_delay_us(1);
+		_delay_us(3);
         src <<= 1;
- 20e:	88 0f       	add	r24, r24
- 210:	ee cf       	rjmp	.-36     	; 0x1ee <TWI_WriteByte+0x8>
- 212:	08 95       	ret
-
-00000214 <TWI_WriteWord>:
+ 23e:	88 0f       	add	r24, r24
+ 240:	ee cf       	rjmp	.-36     	; 0x21e <TWI_WriteByte+0x8>
+    }
+	SCL_116_H;
+ 242:	45 9a       	sbi	0x08, 5	; 8
+	SDA_116_IN;
+ 244:	3c 98       	cbi	0x07, 4	; 7
 }
+ 246:	08 95       	ret
+
+00000248 <TWI_WriteWord>:
 
 void TWI_WriteWord(unsigned int src)
 {
     unsigned char i = 0;
     SDA_116_OUT;
- 214:	3c 9a       	sbi	0x07, 4	; 7
- 216:	30 e0       	ldi	r19, 0x00	; 0
- 218:	55 e0       	ldi	r21, 0x05	; 5
+ 248:	3c 9a       	sbi	0x07, 4	; 7
+ 24a:	30 e0       	ldi	r19, 0x00	; 0
+ 24c:	55 e0       	ldi	r21, 0x05	; 5
     for (i = 0; i < 16; i++)
     {
         if (src & 0x8000)
- 21a:	42 e0       	ldi	r20, 0x02	; 2
- 21c:	97 ff       	sbrs	r25, 7
- 21e:	02 c0       	rjmp	.+4      	; 0x224 <TWI_WriteWord+0x10>
+ 24e:	42 e0       	ldi	r20, 0x02	; 2
+ 250:	97 ff       	sbrs	r25, 7
+ 252:	02 c0       	rjmp	.+4      	; 0x258 <TWI_WriteWord+0x10>
             SDA_116_H;
- 220:	44 9a       	sbi	0x08, 4	; 8
- 222:	01 c0       	rjmp	.+2      	; 0x226 <TWI_WriteWord+0x12>
+ 254:	44 9a       	sbi	0x08, 4	; 8
+ 256:	01 c0       	rjmp	.+2      	; 0x25a <TWI_WriteWord+0x12>
         else
             SDA_116_L;
- 224:	44 98       	cbi	0x08, 4	; 8
+ 258:	44 98       	cbi	0x08, 4	; 8
         SCL_116_H;
- 226:	45 9a       	sbi	0x08, 5	; 8
- 228:	25 2f       	mov	r18, r21
- 22a:	2a 95       	dec	r18
- 22c:	f1 f7       	brne	.-4      	; 0x22a <TWI_WriteWord+0x16>
+ 25a:	45 9a       	sbi	0x08, 5	; 8
+ 25c:	25 2f       	mov	r18, r21
+ 25e:	2a 95       	dec	r18
+ 260:	f1 f7       	brne	.-4      	; 0x25e <TWI_WriteWord+0x16>
         _delay_us(2);
         SCL_116_L;
- 22e:	45 98       	cbi	0x08, 5	; 8
- 230:	24 2f       	mov	r18, r20
- 232:	2a 95       	dec	r18
- 234:	f1 f7       	brne	.-4      	; 0x232 <TWI_WriteWord+0x1e>
+ 262:	45 98       	cbi	0x08, 5	; 8
+ 264:	24 2f       	mov	r18, r20
+ 266:	2a 95       	dec	r18
+ 268:	f1 f7       	brne	.-4      	; 0x266 <TWI_WriteWord+0x1e>
 
 void TWI_WriteWord(unsigned int src)
 {
     unsigned char i = 0;
     SDA_116_OUT;
     for (i = 0; i < 16; i++)
- 236:	3f 5f       	subi	r19, 0xFF	; 255
- 238:	30 31       	cpi	r19, 0x10	; 16
- 23a:	19 f0       	breq	.+6      	; 0x242 <TWI_WriteWord+0x2e>
+ 26a:	3f 5f       	subi	r19, 0xFF	; 255
+ 26c:	30 31       	cpi	r19, 0x10	; 16
+ 26e:	19 f0       	breq	.+6      	; 0x276 <TWI_WriteWord+0x2e>
             SDA_116_L;
         SCL_116_H;
         _delay_us(2);
         SCL_116_L;
 		_delay_us(1);
         src <<= 1;
- 23c:	88 0f       	add	r24, r24
- 23e:	99 1f       	adc	r25, r25
- 240:	ed cf       	rjmp	.-38     	; 0x21c <TWI_WriteWord+0x8>
- 242:	08 95       	ret
+ 270:	88 0f       	add	r24, r24
+ 272:	99 1f       	adc	r25, r25
+ 274:	ed cf       	rjmp	.-38     	; 0x250 <TWI_WriteWord+0x8>
+ 276:	08 95       	ret
 
-00000244 <TWI_ReadByte>:
-}
-
-unsigned char TWI_ReadByte(void)
-{
-    unsigned char i, tmp=0;
-    SDA_116_IN;
- 244:	3c 98       	cbi	0x07, 4	; 7
- 246:	20 e0       	ldi	r18, 0x00	; 0
- 248:	80 e0       	ldi	r24, 0x00	; 0
- 24a:	32 e0       	ldi	r19, 0x02	; 2
-    for (i = 0; i < 8; i++)
-    {
-		if(SDA_116_HL)
- 24c:	34 9b       	sbis	0x06, 4	; 6
- 24e:	03 c0       	rjmp	.+6      	; 0x256 <TWI_ReadByte+0x12>
-            tmp = (tmp << 1) | 0x01;
- 250:	88 0f       	add	r24, r24
- 252:	81 60       	ori	r24, 0x01	; 1
- 254:	01 c0       	rjmp	.+2      	; 0x258 <TWI_ReadByte+0x14>
-        else
-            tmp = tmp << 1;
- 256:	88 0f       	add	r24, r24
-		SCL_116_H;
- 258:	45 9a       	sbi	0x08, 5	; 8
- 25a:	93 2f       	mov	r25, r19
- 25c:	9a 95       	dec	r25
- 25e:	f1 f7       	brne	.-4      	; 0x25c <TWI_ReadByte+0x18>
-        _delay_us(1);
-        SCL_116_L;
- 260:	45 98       	cbi	0x08, 5	; 8
- 262:	93 2f       	mov	r25, r19
- 264:	9a 95       	dec	r25
- 266:	f1 f7       	brne	.-4      	; 0x264 <TWI_ReadByte+0x20>
-
-unsigned char TWI_ReadByte(void)
-{
-    unsigned char i, tmp=0;
-    SDA_116_IN;
-    for (i = 0; i < 8; i++)
- 268:	2f 5f       	subi	r18, 0xFF	; 255
- 26a:	28 30       	cpi	r18, 0x08	; 8
- 26c:	79 f7       	brne	.-34     	; 0x24c <TWI_ReadByte+0x8>
-        _delay_us(1);
-        SCL_116_L;
-		_delay_us(1);
-    }
-    return tmp;
-}
- 26e:	08 95       	ret
-
-00000270 <TWI_ReadWord>:
+00000278 <TWI_ReadWord>:
 
 unsigned int TWI_ReadWord(void)
 {
     unsigned int regVal = 0;
     unsigned char i = 0;
     SDA_116_IN;
- 270:	3c 98       	cbi	0x07, 4	; 7
- 272:	82 e0       	ldi	r24, 0x02	; 2
- 274:	8a 95       	dec	r24
- 276:	f1 f7       	brne	.-4      	; 0x274 <TWI_ReadWord+0x4>
- 278:	20 e0       	ldi	r18, 0x00	; 0
- 27a:	30 e0       	ldi	r19, 0x00	; 0
- 27c:	40 e0       	ldi	r20, 0x00	; 0
-	_delay_us(1);
+ 278:	3c 98       	cbi	0x07, 4	; 7
+ 27a:	20 e0       	ldi	r18, 0x00	; 0
+ 27c:	30 e0       	ldi	r19, 0x00	; 0
+ 27e:	40 e0       	ldi	r20, 0x00	; 0
+ 280:	65 e0       	ldi	r22, 0x05	; 5
     for (i = 0; i < 16; i++)
     {
-        if (SDA_116_HL)
- 27e:	52 e0       	ldi	r21, 0x02	; 2
- 280:	c9 01       	movw	r24, r18
- 282:	88 0f       	add	r24, r24
- 284:	99 1f       	adc	r25, r25
- 286:	34 9b       	sbis	0x06, 4	; 6
- 288:	03 c0       	rjmp	.+6      	; 0x290 <TWI_ReadWord+0x20>
+		SCL_116_H;
+ 282:	5a e0       	ldi	r21, 0x0A	; 10
+ 284:	45 9a       	sbi	0x08, 5	; 8
+ 286:	c9 01       	movw	r24, r18
+ 288:	88 0f       	add	r24, r24
+ 28a:	99 1f       	adc	r25, r25
+		if (SDA_116_HL)
+ 28c:	34 9b       	sbis	0x06, 4	; 6
+ 28e:	03 c0       	rjmp	.+6      	; 0x296 <TWI_ReadWord+0x1e>
             regVal = (regVal << 1) | 0x01;
- 28a:	9c 01       	movw	r18, r24
- 28c:	21 60       	ori	r18, 0x01	; 1
- 28e:	01 c0       	rjmp	.+2      	; 0x292 <TWI_ReadWord+0x22>
+ 290:	9c 01       	movw	r18, r24
+ 292:	21 60       	ori	r18, 0x01	; 1
+ 294:	01 c0       	rjmp	.+2      	; 0x298 <TWI_ReadWord+0x20>
         else
             regVal = regVal << 1;
- 290:	9c 01       	movw	r18, r24
-		SCL_116_H;
- 292:	45 9a       	sbi	0x08, 5	; 8
- 294:	85 2f       	mov	r24, r21
- 296:	8a 95       	dec	r24
- 298:	f1 f7       	brne	.-4      	; 0x296 <TWI_ReadWord+0x26>
-        _delay_us(1);
+ 296:	9c 01       	movw	r18, r24
+ 298:	86 2f       	mov	r24, r22
+ 29a:	8a 95       	dec	r24
+ 29c:	f1 f7       	brne	.-4      	; 0x29a <TWI_ReadWord+0x22>
+        _delay_us(2);
         SCL_116_L;
- 29a:	45 98       	cbi	0x08, 5	; 8
- 29c:	85 2f       	mov	r24, r21
- 29e:	8a 95       	dec	r24
- 2a0:	f1 f7       	brne	.-4      	; 0x29e <TWI_ReadWord+0x2e>
+ 29e:	45 98       	cbi	0x08, 5	; 8
+ 2a0:	85 2f       	mov	r24, r21
+ 2a2:	8a 95       	dec	r24
+ 2a4:	f1 f7       	brne	.-4      	; 0x2a2 <TWI_ReadWord+0x2a>
+unsigned int TWI_ReadWord(void)
 {
     unsigned int regVal = 0;
     unsigned char i = 0;
     SDA_116_IN;
-	_delay_us(1);
     for (i = 0; i < 16; i++)
- 2a2:	4f 5f       	subi	r20, 0xFF	; 255
- 2a4:	40 31       	cpi	r20, 0x10	; 16
- 2a6:	61 f7       	brne	.-40     	; 0x280 <TWI_ReadWord+0x10>
-        _delay_us(1);
+ 2a6:	4f 5f       	subi	r20, 0xFF	; 255
+ 2a8:	40 31       	cpi	r20, 0x10	; 16
+ 2aa:	61 f7       	brne	.-40     	; 0x284 <TWI_ReadWord+0xc>
+        _delay_us(2);
         SCL_116_L;
-		_delay_us(1);
+		_delay_us(4);
     }
     return regVal;
 }
- 2a8:	c9 01       	movw	r24, r18
- 2aa:	08 95       	ret
+ 2ac:	c9 01       	movw	r24, r18
+ 2ae:	08 95       	ret
 
-000002ac <TMP116Init>:
+000002b0 <TMP116Init>:
 
 void TMP116Init(void)
 {
- 2ac:	1f 93       	push	r17
+ 2b0:	1f 93       	push	r17
 	TWI_WriteByte(TMP116_W_ADDR);	// IC slave address
- 2ae:	81 e9       	ldi	r24, 0x91	; 145
- 2b0:	9a df       	rcall	.-204    	; 0x1e6 <TWI_WriteByte>
- 2b2:	15 e0       	ldi	r17, 0x05	; 5
- 2b4:	81 2f       	mov	r24, r17
- 2b6:	8a 95       	dec	r24
- 2b8:	f1 f7       	brne	.-4      	; 0x2b6 <TMP116Init+0xa>
+ 2b2:	80 e9       	ldi	r24, 0x90	; 144
+ 2b4:	b0 df       	rcall	.-160    	; 0x216 <TWI_WriteByte>
+ 2b6:	15 e0       	ldi	r17, 0x05	; 5
+ 2b8:	81 2f       	mov	r24, r17
+ 2ba:	8a 95       	dec	r24
+ 2bc:	f1 f7       	brne	.-4      	; 0x2ba <TMP116Init+0xa>
 	_delay_us(2);
 
 	TWI_WriteByte(0x01);			// configure register address 0x01
- 2ba:	81 e0       	ldi	r24, 0x01	; 1
- 2bc:	94 df       	rcall	.-216    	; 0x1e6 <TWI_WriteByte>
- 2be:	81 2f       	mov	r24, r17
- 2c0:	8a 95       	dec	r24
- 2c2:	f1 f7       	brne	.-4      	; 0x2c0 <TMP116Init+0x14>
+ 2be:	81 e0       	ldi	r24, 0x01	; 1
+ 2c0:	aa df       	rcall	.-172    	; 0x216 <TWI_WriteByte>
+ 2c2:	81 2f       	mov	r24, r17
+ 2c4:	8a 95       	dec	r24
+ 2c6:	f1 f7       	brne	.-4      	; 0x2c4 <TMP116Init+0x14>
 	_delay_us(2);
 
 	TWI_WriteWord(0x250);
- 2c4:	80 e5       	ldi	r24, 0x50	; 80
- 2c6:	92 e0       	ldi	r25, 0x02	; 2
- 2c8:	a5 df       	rcall	.-182    	; 0x214 <TWI_WriteWord>
- 2ca:	1a 95       	dec	r17
- 2cc:	f1 f7       	brne	.-4      	; 0x2ca <TMP116Init+0x1e>
+ 2c8:	80 e5       	ldi	r24, 0x50	; 80
+ 2ca:	92 e0       	ldi	r25, 0x02	; 2
+ 2cc:	bd df       	rcall	.-134    	; 0x248 <TWI_WriteWord>
+ 2ce:	1a 95       	dec	r17
+ 2d0:	f1 f7       	brne	.-4      	; 0x2ce <TMP116Init+0x1e>
 	_delay_us(2);
 
 }
- 2ce:	1f 91       	pop	r17
- 2d0:	08 95       	ret
+ 2d2:	1f 91       	pop	r17
+ 2d4:	08 95       	ret
 
-000002d2 <ReadTemp>:
+000002d6 <ReadTemp>:
 
 unsigned int ReadTemp(void)
 {
- 2d2:	ff 92       	push	r15
- 2d4:	0f 93       	push	r16
- 2d6:	1f 93       	push	r17
+ 2d6:	ff 92       	push	r15
+ 2d8:	0f 93       	push	r16
+ 2da:	1f 93       	push	r17
 	unsigned int value = 0;
 	unsigned char temp = 0;
-	SDA_116_OUT;
- 2d8:	3c 9a       	sbi	0x07, 4	; 7
-	SCL_116_H;
- 2da:	45 9a       	sbi	0x08, 5	; 8
-	SDA_116_H;
- 2dc:	44 9a       	sbi	0x08, 4	; 8
- 2de:	45 e0       	ldi	r20, 0x05	; 5
- 2e0:	f4 2e       	mov	r15, r20
- 2e2:	8f 2d       	mov	r24, r15
- 2e4:	8a 95       	dec	r24
- 2e6:	f1 f7       	brne	.-4      	; 0x2e4 <ReadTemp+0x12>
-	_delay_us(2);
+	
+	SDA_116_OUT;		
+ 2dc:	3c 9a       	sbi	0x07, 4	; 7
 	SDA_116_L;
- 2e8:	44 98       	cbi	0x08, 4	; 8
+ 2de:	44 98       	cbi	0x08, 4	; 8
+ 2e0:	82 e0       	ldi	r24, 0x02	; 2
+ 2e2:	8a 95       	dec	r24
+ 2e4:	f1 f7       	brne	.-4      	; 0x2e2 <ReadTemp+0xc>
+	_delay_us(1);	//start 
+	SCL_116_L;
+ 2e6:	45 98       	cbi	0x08, 5	; 8
+ 2e8:	18 e0       	ldi	r17, 0x08	; 8
+ 2ea:	81 2f       	mov	r24, r17
+ 2ec:	8a 95       	dec	r24
+ 2ee:	f1 f7       	brne	.-4      	; 0x2ec <ReadTemp+0x16>
+	_delay_us(3);
 	
 	TWI_WriteByte(TMP116_W_ADDR);	// IC slave address
- 2ea:	81 e9       	ldi	r24, 0x91	; 145
- 2ec:	7c df       	rcall	.-264    	; 0x1e6 <TWI_WriteByte>
+ 2f0:	80 e9       	ldi	r24, 0x90	; 144
+ 2f2:	91 df       	rcall	.-222    	; 0x216 <TWI_WriteByte>
+ 2f4:	4a e0       	ldi	r20, 0x0A	; 10
+ 2f6:	f4 2e       	mov	r15, r20
+ 2f8:	8f 2d       	mov	r24, r15
+ 2fa:	8a 95       	dec	r24
+ 2fc:	f1 f7       	brne	.-4      	; 0x2fa <ReadTemp+0x24>
+	
+	_delay_us(4);
+	SCL_116_L;			// 应答
+ 2fe:	45 98       	cbi	0x08, 5	; 8
+ 300:	8f 2d       	mov	r24, r15
+ 302:	8a 95       	dec	r24
+ 304:	f1 f7       	brne	.-4      	; 0x302 <__stack+0x3>
+	_delay_us(4);
 
+	TWI_WriteByte(0x00);				// data register address 0x00
+ 306:	80 e0       	ldi	r24, 0x00	; 0
+ 308:	86 df       	rcall	.-244    	; 0x216 <TWI_WriteByte>
+ 30a:	8f 2d       	mov	r24, r15
+ 30c:	8a 95       	dec	r24
+ 30e:	f1 f7       	brne	.-4      	; 0x30c <__stack+0xd>
+
+	_delay_us(4);
+	SCL_116_L;			// 应答
+ 310:	45 98       	cbi	0x08, 5	; 8
+ 312:	81 2f       	mov	r24, r17
+ 314:	8a 95       	dec	r24
+ 316:	f1 f7       	brne	.-4      	; 0x314 <__stack+0x15>
+	_delay_us(3);
+	
 	SCL_116_H;
- 2ee:	45 9a       	sbi	0x08, 5	; 8
- 2f0:	8f 2d       	mov	r24, r15
- 2f2:	8a 95       	dec	r24
- 2f4:	f1 f7       	brne	.-4      	; 0x2f2 <ReadTemp+0x20>
-	_delay_us(2);
+ 318:	45 9a       	sbi	0x08, 5	; 8
+ 31a:	81 2f       	mov	r24, r17
+ 31c:	8a 95       	dec	r24
+ 31e:	f1 f7       	brne	.-4      	; 0x31c <__stack+0x1d>
+	_delay_us(3);
 	SDA_116_L;
- 2f6:	44 98       	cbi	0x08, 4	; 8
-
-
-	TWI_WriteByte(0x0);				// data register address 0x00
- 2f8:	80 e0       	ldi	r24, 0x00	; 0
- 2fa:	75 df       	rcall	.-278    	; 0x1e6 <TWI_WriteByte>
-
-	SDA_116_OUT;
- 2fc:	3c 9a       	sbi	0x07, 4	; 7
-	SCL_116_H;
- 2fe:	45 9a       	sbi	0x08, 5	; 8
-	SDA_116_H;
- 300:	44 9a       	sbi	0x08, 4	; 8
- 302:	8f 2d       	mov	r24, r15
- 304:	8a 95       	dec	r24
- 306:	f1 f7       	brne	.-4      	; 0x304 <__stack+0x5>
-	_delay_us(2);
-	SDA_116_L;
- 308:	44 98       	cbi	0x08, 4	; 8
+ 320:	44 98       	cbi	0x08, 4	; 8
+	SDA_116_OUT;		
+ 322:	3c 9a       	sbi	0x07, 4	; 7
+ 324:	1a 95       	dec	r17
+ 326:	f1 f7       	brne	.-4      	; 0x324 <__stack+0x25>
+	_delay_us(3);
+	SCL_116_L;
+ 328:	45 98       	cbi	0x08, 5	; 8
+ 32a:	8f 2d       	mov	r24, r15
+ 32c:	8a 95       	dec	r24
+ 32e:	f1 f7       	brne	.-4      	; 0x32c <__stack+0x2d>
+	_delay_us(4);	//start
 
 	TWI_WriteByte(TMP116_R_ADDR);	// IC slave address
- 30a:	80 e9       	ldi	r24, 0x90	; 144
- 30c:	6c df       	rcall	.-296    	; 0x1e6 <TWI_WriteByte>
-
-	SCL_116_H;
- 30e:	45 9a       	sbi	0x08, 5	; 8
- 310:	8f 2d       	mov	r24, r15
- 312:	8a 95       	dec	r24
- 314:	f1 f7       	brne	.-4      	; 0x312 <__stack+0x13>
-	_delay_us(2);
-	SDA_116_L;
- 316:	44 98       	cbi	0x08, 4	; 8
-
+ 330:	81 e9       	ldi	r24, 0x91	; 145
+ 332:	71 df       	rcall	.-286    	; 0x216 <TWI_WriteByte>
+ 334:	8f 2d       	mov	r24, r15
+ 336:	8a 95       	dec	r24
+ 338:	f1 f7       	brne	.-4      	; 0x336 <__stack+0x37>
 	
+	_delay_us(4);
+	SCL_116_L;			// 应答
+ 33a:	45 98       	cbi	0x08, 5	; 8
+ 33c:	8f 2d       	mov	r24, r15
+ 33e:	8a 95       	dec	r24
+ 340:	f1 f7       	brne	.-4      	; 0x33e <__stack+0x3f>
+	_delay_us(4);
+	
+
 	temp = TWI_ReadByte();
- 318:	95 df       	rcall	.-214    	; 0x244 <TWI_ReadByte>
+ 342:	50 df       	rcall	.-352    	; 0x1e4 <TWI_ReadByte>
+	SCL_116_H;	
+ 344:	45 9a       	sbi	0x08, 5	; 8
 	value = temp;
 	value <<= 8;
- 31a:	18 2f       	mov	r17, r24
- 31c:	00 e0       	ldi	r16, 0x00	; 0
-	
-	SCL_116_H;
- 31e:	45 9a       	sbi	0x08, 5	; 8
- 320:	fa 94       	dec	r15
- 322:	f1 f7       	brne	.-4      	; 0x320 <__stack+0x21>
-	_delay_us(2);
+ 346:	18 2f       	mov	r17, r24
+ 348:	00 e0       	ldi	r16, 0x00	; 0
 	SDA_116_L;
- 324:	44 98       	cbi	0x08, 4	; 8
+ 34a:	44 98       	cbi	0x08, 4	; 8
+	SDA_116_OUT;
+ 34c:	3c 9a       	sbi	0x07, 4	; 7
+	SCL_116_H;
+ 34e:	45 9a       	sbi	0x08, 5	; 8
+ 350:	8f 2d       	mov	r24, r15
+ 352:	8a 95       	dec	r24
+ 354:	f1 f7       	brne	.-4      	; 0x352 <__stack+0x53>
+	_delay_us(4);
+	SCL_116_L;			// 应答
+ 356:	45 98       	cbi	0x08, 5	; 8
+ 358:	8f 2d       	mov	r24, r15
+ 35a:	8a 95       	dec	r24
+ 35c:	f1 f7       	brne	.-4      	; 0x35a <__stack+0x5b>
+	_delay_us(4);
 
 	temp = TWI_ReadByte();
- 326:	8e df       	rcall	.-228    	; 0x244 <TWI_ReadByte>
- 328:	28 2f       	mov	r18, r24
- 32a:	30 e0       	ldi	r19, 0x00	; 0
- 32c:	20 2b       	or	r18, r16
- 32e:	31 2b       	or	r19, r17
+ 35e:	42 df       	rcall	.-380    	; 0x1e4 <TWI_ReadByte>
+ 360:	28 2f       	mov	r18, r24
 	value |= temp;
+
+	
+	SDA_116_H;
+ 362:	44 9a       	sbi	0x08, 4	; 8
+	SDA_116_OUT;
+ 364:	3c 9a       	sbi	0x07, 4	; 7
+	SCL_116_H;
+ 366:	45 9a       	sbi	0x08, 5	; 8
+ 368:	8f 2d       	mov	r24, r15
+ 36a:	8a 95       	dec	r24
+ 36c:	f1 f7       	brne	.-4      	; 0x36a <__stack+0x6b>
+	_delay_us(4);
+	SCL_116_L;			// 应答
+ 36e:	45 98       	cbi	0x08, 5	; 8
+	SDA_116_L;
+ 370:	44 98       	cbi	0x08, 4	; 8
+ 372:	fa 94       	dec	r15
+ 374:	f1 f7       	brne	.-4      	; 0x372 <__stack+0x73>
+	_delay_us(4);
+	SCL_116_H;
+ 376:	45 9a       	sbi	0x08, 5	; 8
+	SDA_116_H;
+ 378:	44 9a       	sbi	0x08, 4	; 8
+ 37a:	30 e0       	ldi	r19, 0x00	; 0
+ 37c:	20 2b       	or	r18, r16
+ 37e:	31 2b       	or	r19, r17
 	return value;
 }
- 330:	c9 01       	movw	r24, r18
- 332:	1f 91       	pop	r17
- 334:	0f 91       	pop	r16
- 336:	ff 90       	pop	r15
- 338:	08 95       	ret
+ 380:	c9 01       	movw	r24, r18
+ 382:	1f 91       	pop	r17
+ 384:	0f 91       	pop	r16
+ 386:	ff 90       	pop	r15
+ 388:	08 95       	ret
 
-0000033a <UartInit>:
+0000038a <UartInit>:
 
 void UartInit(void)
 {
     UBRR0H = (F_CPU / BAUD / 16 - 1) / 256;
- 33a:	10 92 c5 00 	sts	0x00C5, r1
+ 38a:	10 92 c5 00 	sts	0x00C5, r1
     UBRR0L = (F_CPU / BAUD / 16 - 1) % 256;
- 33e:	8c e0       	ldi	r24, 0x0C	; 12
- 340:	80 93 c4 00 	sts	0x00C4, r24
+ 38e:	8c e0       	ldi	r24, 0x0C	; 12
+ 390:	80 93 c4 00 	sts	0x00C4, r24
     UCSR0B = 1<<RXEN0 | 1<<TXEN0 | 1<<RXCIE0;
- 344:	88 e9       	ldi	r24, 0x98	; 152
- 346:	80 93 c1 00 	sts	0x00C1, r24
+ 394:	88 e9       	ldi	r24, 0x98	; 152
+ 396:	80 93 c1 00 	sts	0x00C1, r24
     UCSR0C = 1<<UCSZ00 | 1<<UCSZ01;
- 34a:	86 e0       	ldi	r24, 0x06	; 6
- 34c:	80 93 c2 00 	sts	0x00C2, r24
+ 39a:	86 e0       	ldi	r24, 0x06	; 6
+ 39c:	80 93 c2 00 	sts	0x00C2, r24
 }
- 350:	08 95       	ret
+ 3a0:	08 95       	ret
 
-00000352 <SendStr>:
+000003a2 <SendStr>:
 void SendStr(unsigned char* data,unsigned char len)
 {
- 352:	58 2f       	mov	r21, r24
- 354:	28 2f       	mov	r18, r24
- 356:	39 2f       	mov	r19, r25
- 358:	f9 01       	movw	r30, r18
- 35a:	07 c0       	rjmp	.+14     	; 0x36a <SendStr+0x18>
+ 3a2:	58 2f       	mov	r21, r24
+ 3a4:	28 2f       	mov	r18, r24
+ 3a6:	39 2f       	mov	r19, r25
+ 3a8:	f9 01       	movw	r30, r18
+ 3aa:	07 c0       	rjmp	.+14     	; 0x3ba <SendStr+0x18>
     unsigned char i;
     for(i=0; i<len; i++)
     {
         while(!(UCSR0A & (1 << UDRE0)));
- 35c:	80 91 c0 00 	lds	r24, 0x00C0
- 360:	85 ff       	sbrs	r24, 5
- 362:	fc cf       	rjmp	.-8      	; 0x35c <SendStr+0xa>
+ 3ac:	80 91 c0 00 	lds	r24, 0x00C0
+ 3b0:	85 ff       	sbrs	r24, 5
+ 3b2:	fc cf       	rjmp	.-8      	; 0x3ac <SendStr+0xa>
         UDR0 = *(data++);
- 364:	81 91       	ld	r24, Z+
- 366:	80 93 c6 00 	sts	0x00C6, r24
+ 3b4:	81 91       	ld	r24, Z+
+ 3b6:	80 93 c6 00 	sts	0x00C6, r24
     UCSR0C = 1<<UCSZ00 | 1<<UCSZ01;
 }
 void SendStr(unsigned char* data,unsigned char len)
 {
     unsigned char i;
     for(i=0; i<len; i++)
- 36a:	8e 2f       	mov	r24, r30
- 36c:	85 1b       	sub	r24, r21
- 36e:	86 17       	cp	r24, r22
- 370:	a8 f3       	brcs	.-22     	; 0x35c <SendStr+0xa>
+ 3ba:	8e 2f       	mov	r24, r30
+ 3bc:	85 1b       	sub	r24, r21
+ 3be:	86 17       	cp	r24, r22
+ 3c0:	a8 f3       	brcs	.-22     	; 0x3ac <SendStr+0xa>
     {
         while(!(UCSR0A & (1 << UDRE0)));
         UDR0 = *(data++);
     }
 } 
- 372:	08 95       	ret
+ 3c2:	08 95       	ret
 
-00000374 <main>:
+000003c4 <main>:
 
 int main(void)
 {
- 374:	ef 92       	push	r14
- 376:	ff 92       	push	r15
- 378:	0f 93       	push	r16
- 37a:	1f 93       	push	r17
- 37c:	df 93       	push	r29
- 37e:	cf 93       	push	r28
- 380:	00 d0       	rcall	.+0      	; 0x382 <main+0xe>
- 382:	cd b7       	in	r28, 0x3d	; 61
- 384:	de b7       	in	r29, 0x3e	; 62
+ 3c4:	ef 92       	push	r14
+ 3c6:	ff 92       	push	r15
+ 3c8:	0f 93       	push	r16
+ 3ca:	1f 93       	push	r17
+ 3cc:	df 93       	push	r29
+ 3ce:	cf 93       	push	r28
+ 3d0:	00 d0       	rcall	.+0      	; 0x3d2 <main+0xe>
+ 3d2:	cd b7       	in	r28, 0x3d	; 61
+ 3d4:	de b7       	in	r29, 0x3e	; 62
  	unsigned int i;
 	unsigned char str[2] = {0};
- 386:	1a 82       	std	Y+2, r1	; 0x02
- 388:	19 82       	std	Y+1, r1	; 0x01
+ 3d6:	1a 82       	std	Y+2, r1	; 0x02
+ 3d8:	19 82       	std	Y+1, r1	; 0x01
  	PortInit();
- 38a:	20 df       	rcall	.-448    	; 0x1cc <PortInit>
+ 3da:	f7 de       	rcall	.-530    	; 0x1ca <PortInit>
 	return value;
 }
 
 void UartInit(void)
 {
     UBRR0H = (F_CPU / BAUD / 16 - 1) / 256;
- 38c:	10 92 c5 00 	sts	0x00C5, r1
+ 3dc:	10 92 c5 00 	sts	0x00C5, r1
     UBRR0L = (F_CPU / BAUD / 16 - 1) % 256;
- 390:	8c e0       	ldi	r24, 0x0C	; 12
- 392:	80 93 c4 00 	sts	0x00C4, r24
+ 3e0:	8c e0       	ldi	r24, 0x0C	; 12
+ 3e2:	80 93 c4 00 	sts	0x00C4, r24
     UCSR0B = 1<<RXEN0 | 1<<TXEN0 | 1<<RXCIE0;
- 396:	88 e9       	ldi	r24, 0x98	; 152
- 398:	80 93 c1 00 	sts	0x00C1, r24
+ 3e6:	88 e9       	ldi	r24, 0x98	; 152
+ 3e8:	80 93 c1 00 	sts	0x00C1, r24
     UCSR0C = 1<<UCSZ00 | 1<<UCSZ01;
- 39c:	86 e0       	ldi	r24, 0x06	; 6
- 39e:	80 93 c2 00 	sts	0x00C2, r24
-{
- 	unsigned int i;
-	unsigned char str[2] = {0};
- 	PortInit();
-	UartInit();
-	TWIInt();
- 3a2:	5c de       	rcall	.-840    	; 0x5c <TWIInt>
- 3a4:	88 eb       	ldi	r24, 0xB8	; 184
- 3a6:	9b e0       	ldi	r25, 0x0B	; 11
+ 3ec:	86 e0       	ldi	r24, 0x06	; 6
+ 3ee:	80 93 c2 00 	sts	0x00C2, r24
+ 3f2:	88 eb       	ldi	r24, 0xB8	; 184
+ 3f4:	9b e0       	ldi	r25, 0x0B	; 11
     milliseconds can be achieved.
  */
 void
 _delay_loop_2(uint16_t __count)
 {
 	__asm__ volatile (
- 3a8:	28 ec       	ldi	r18, 0xC8	; 200
- 3aa:	30 e0       	ldi	r19, 0x00	; 0
- 3ac:	f9 01       	movw	r30, r18
- 3ae:	31 97       	sbiw	r30, 0x01	; 1
- 3b0:	f1 f7       	brne	.-4      	; 0x3ae <main+0x3a>
+ 3f6:	28 ec       	ldi	r18, 0xC8	; 200
+ 3f8:	30 e0       	ldi	r19, 0x00	; 0
+ 3fa:	f9 01       	movw	r30, r18
+ 3fc:	31 97       	sbiw	r30, 0x01	; 1
+ 3fe:	f1 f7       	brne	.-4      	; 0x3fc <main+0x38>
 		__ticks = (uint16_t) (__ms * 10.0);
 		while(__ticks)
 		{
 			// wait 1/10 ms
 			_delay_loop_2(((F_CPU) / 4e3) / 10);
 			__ticks --;
- 3b2:	01 97       	sbiw	r24, 0x01	; 1
+ 400:	01 97       	sbiw	r24, 0x01	; 1
 		__ticks = 1;
 	else if (__tmp > 65535)
 	{
 		//	__ticks = requested delay in 1/10 ms
 		__ticks = (uint16_t) (__ms * 10.0);
 		while(__ticks)
- 3b4:	d9 f7       	brne	.-10     	; 0x3ac <main+0x38>
+ 402:	d9 f7       	brne	.-10     	; 0x3fa <main+0x36>
+ 	unsigned int i;
+	unsigned char str[2] = {0};
+ 	PortInit();
+	UartInit();
 	_delay_ms(300);
 	SendStr("OK",2);
- 3b6:	80 e0       	ldi	r24, 0x00	; 0
- 3b8:	91 e0       	ldi	r25, 0x01	; 1
- 3ba:	62 e0       	ldi	r22, 0x02	; 2
- 3bc:	ca df       	rcall	.-108    	; 0x352 <SendStr>
-	//	str[1] = I2C_Read(0x00);
-		i = I2C_Read(0x00);
+ 404:	80 e0       	ldi	r24, 0x00	; 0
+ 406:	91 e0       	ldi	r25, 0x01	; 1
+ 408:	62 e0       	ldi	r22, 0x02	; 2
+ 40a:	cb df       	rcall	.-106    	; 0x3a2 <SendStr>
+	TWIInt();
+ 40c:	27 de       	rcall	.-946    	; 0x5c <TWIInt>
+		i = ReadTemp();
+		//i = I2C_Read(0x01);
 		str[0] = (i>>8);
 		str[1] = i&0xFF;
 
 		SendStr(str,2);
- 3be:	7e 01       	movw	r14, r28
- 3c0:	08 94       	sec
- 3c2:	e1 1c       	adc	r14, r1
- 3c4:	f1 1c       	adc	r15, r1
- 3c6:	08 ec       	ldi	r16, 0xC8	; 200
- 3c8:	10 e0       	ldi	r17, 0x00	; 0
+ 40e:	7e 01       	movw	r14, r28
+ 410:	08 94       	sec
+ 412:	e1 1c       	adc	r14, r1
+ 414:	f1 1c       	adc	r15, r1
+ 416:	08 ec       	ldi	r16, 0xC8	; 200
+ 418:	10 e0       	ldi	r17, 0x00	; 0
 //	TMP116Init();
 	while(1)
 	{
 	//	str[0] = I2C_Read(0x00);
 	//	str[1] = I2C_Read(0x00);
-		i = I2C_Read(0x00);
- 3ca:	80 e0       	ldi	r24, 0x00	; 0
- 3cc:	90 e0       	ldi	r25, 0x00	; 0
- 3ce:	91 de       	rcall	.-734    	; 0xf2 <I2C_Read>
+		i = ReadTemp();
+ 41a:	5d df       	rcall	.-326    	; 0x2d6 <ReadTemp>
+		//i = I2C_Read(0x01);
 		str[0] = (i>>8);
- 3d0:	99 83       	std	Y+1, r25	; 0x01
+ 41c:	99 83       	std	Y+1, r25	; 0x01
 		str[1] = i&0xFF;
- 3d2:	8a 83       	std	Y+2, r24	; 0x02
+ 41e:	8a 83       	std	Y+2, r24	; 0x02
 
 		SendStr(str,2);
- 3d4:	c7 01       	movw	r24, r14
- 3d6:	62 e0       	ldi	r22, 0x02	; 2
- 3d8:	bc df       	rcall	.-136    	; 0x352 <SendStr>
- 3da:	80 eb       	ldi	r24, 0xB0	; 176
- 3dc:	96 e3       	ldi	r25, 0x36	; 54
- 3de:	f8 01       	movw	r30, r16
- 3e0:	31 97       	sbiw	r30, 0x01	; 1
- 3e2:	f1 f7       	brne	.-4      	; 0x3e0 <main+0x6c>
+ 420:	c7 01       	movw	r24, r14
+ 422:	62 e0       	ldi	r22, 0x02	; 2
+ 424:	be df       	rcall	.-132    	; 0x3a2 <SendStr>
+ 426:	80 eb       	ldi	r24, 0xB0	; 176
+ 428:	96 e3       	ldi	r25, 0x36	; 54
+ 42a:	f8 01       	movw	r30, r16
+ 42c:	31 97       	sbiw	r30, 0x01	; 1
+ 42e:	f1 f7       	brne	.-4      	; 0x42c <main+0x68>
 		{
 			// wait 1/10 ms
 			_delay_loop_2(((F_CPU) / 4e3) / 10);
 			__ticks --;
- 3e4:	01 97       	sbiw	r24, 0x01	; 1
+ 430:	01 97       	sbiw	r24, 0x01	; 1
 		__ticks = 1;
 	else if (__tmp > 65535)
 	{
 		//	__ticks = requested delay in 1/10 ms
 		__ticks = (uint16_t) (__ms * 10.0);
 		while(__ticks)
- 3e6:	d9 f7       	brne	.-10     	; 0x3de <main+0x6a>
- 3e8:	f0 cf       	rjmp	.-32     	; 0x3ca <main+0x56>
+ 432:	d9 f7       	brne	.-10     	; 0x42a <main+0x66>
+ 434:	f2 cf       	rjmp	.-28     	; 0x41a <main+0x56>
 
-000003ea <_exit>:
- 3ea:	f8 94       	cli
+00000436 <_exit>:
+ 436:	f8 94       	cli
 
-000003ec <__stop_program>:
- 3ec:	ff cf       	rjmp	.-2      	; 0x3ec <__stop_program>
+00000438 <__stop_program>:
+ 438:	ff cf       	rjmp	.-2      	; 0x438 <__stop_program>

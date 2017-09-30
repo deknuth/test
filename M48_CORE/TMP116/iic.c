@@ -6,7 +6,7 @@
 	#define MAX 255
 #endif
 
-#define fSCL    20000    // TWI时钟为50KHz 预分频系数=1(TWPS=0)
+#define fSCL    100000    // TWI时钟为50KHz 预分频系数=1(TWPS=0)
 #if F_CPU < fSCL*36
 	#define TWBR_SET    10     // TWBR必须大于等于10
 #else
@@ -102,28 +102,16 @@ unsigned int I2C_Read(unsigned RegAddress)
 	if(TestAck()!=MR_SLA_ACK) 
 		return 1;
 
-
 	Twi(); 			// 启动主I2C读方式
 	Wait();
 	if(TestAck() != MR_DATA_NOACK) 
 		return 1; 
 	temp = TWDR;		// 读取I2C接收数据
 	temp <<= 8;
-	SDA_116_L;
-	TWCR = TW_ACK;
+	
+	Twi(); 			// 启动主I2C读方式
 	Wait();
 	temp |= TWDR;		// 读取I2C接收数据
-	
-	/*
-	TWCR |= 0x04;
-	while(!(TWCR&(1<<TWINT)));
-	temp = TWDR;
-	temp <<= 8;
-	
-	TWCR |= 0x04;
-	while(!(TWCR&(1<<TWINT)));
-	temp += TWDR;
-	*/
 	Stop();
 	
 	return temp;

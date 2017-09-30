@@ -117,7 +117,7 @@ LOAD c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr4\libgcc.a
 .rela.plt
  *(.rela.plt)
 
-.text           0x00000000      0x3ee
+.text           0x00000000      0x43a
  *(.vectors)
  .vectors       0x00000000       0x34 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr4/crtm48p.o
                 0x00000000                __vectors
@@ -197,32 +197,32 @@ LOAD c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr4\libgcc.a
                 0x0000005a                __vector_16
                 0x0000005a                __vector_18
                 0x0000005a                __vector_20
- .text          0x0000005c      0x170 iic.o
+ .text          0x0000005c      0x16e iic.o
                 0x000000f2                I2C_Read
                 0x0000006c                I2C_Write
                 0x0000005c                TWIInt
- .text          0x000001cc      0x21e main.o
-                0x00000352                SendStr
-                0x00000270                TWI_ReadWord
-                0x000002ac                TMP116Init
-                0x0000033a                UartInit
-                0x000002d2                ReadTemp
-                0x00000244                TWI_ReadByte
-                0x00000374                main
-                0x00000214                TWI_WriteWord
-                0x000001cc                PortInit
-                0x000001e6                TWI_WriteByte
- .text          0x000003ea        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr4\libgcc.a(_exit.o)
- .text          0x000003ea        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr4\libgcc.a(_copy_data.o)
-                0x000003ea                . = ALIGN (0x2)
+ .text          0x000001ca      0x26c main.o
+                0x000003a2                SendStr
+                0x00000278                TWI_ReadWord
+                0x000002b0                TMP116Init
+                0x0000038a                UartInit
+                0x000002d6                ReadTemp
+                0x000001e4                TWI_ReadByte
+                0x000003c4                main
+                0x00000248                TWI_WriteWord
+                0x000001ca                PortInit
+                0x00000216                TWI_WriteByte
+ .text          0x00000436        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr4\libgcc.a(_exit.o)
+ .text          0x00000436        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr4\libgcc.a(_copy_data.o)
+                0x00000436                . = ALIGN (0x2)
  *(.text.*)
- .text.libgcc   0x000003ea        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr4\libgcc.a(_exit.o)
- .text.libgcc   0x000003ea        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr4\libgcc.a(_copy_data.o)
-                0x000003ea                . = ALIGN (0x2)
+ .text.libgcc   0x00000436        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr4\libgcc.a(_exit.o)
+ .text.libgcc   0x00000436        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr4\libgcc.a(_copy_data.o)
+                0x00000436                . = ALIGN (0x2)
  *(.fini9)
- .fini9         0x000003ea        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr4\libgcc.a(_exit.o)
-                0x000003ea                exit
-                0x000003ea                _exit
+ .fini9         0x00000436        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr4\libgcc.a(_exit.o)
+                0x00000436                exit
+                0x00000436                _exit
  *(.fini9)
  *(.fini8)
  *(.fini8)
@@ -241,11 +241,11 @@ LOAD c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr4\libgcc.a
  *(.fini1)
  *(.fini1)
  *(.fini0)
- .fini0         0x000003ea        0x4 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr4\libgcc.a(_exit.o)
+ .fini0         0x00000436        0x4 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr4\libgcc.a(_exit.o)
  *(.fini0)
-                0x000003ee                _etext = .
+                0x0000043a                _etext = .
 
-.data           0x00800100        0x4 load address 0x000003ee
+.data           0x00800100        0x4 load address 0x0000043a
                 0x00800100                PROVIDE (__data_start, .)
  *(.data)
  .data          0x00800100        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr4/crtm48p.o
@@ -273,8 +273,8 @@ LOAD c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr4\libgcc.a
  *(.bss*)
  *(COMMON)
                 0x00800104                PROVIDE (__bss_end, .)
-                0x000003ee                __data_load_start = LOADADDR (.data)
-                0x000003f2                __data_load_end = (__data_load_start + SIZEOF (.data))
+                0x0000043a                __data_load_start = LOADADDR (.data)
+                0x0000043e                __data_load_end = (__data_load_start + SIZEOF (.data))
 
 .noinit         0x00800104        0x0
                 0x00800104                PROVIDE (__noinit_start, .)
@@ -347,10 +347,10 @@ LOAD c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr4\libgcc.a
  .debug_pubnames
                 0x00000038       0xa3 main.o
 
-.debug_info     0x00000000      0x854
+.debug_info     0x00000000      0xa2f
  *(.debug_info)
  .debug_info    0x00000000      0x174 iic.o
- .debug_info    0x00000174      0x6e0 main.o
+ .debug_info    0x00000174      0x8bb main.o
  *(.gnu.linkonce.wi.*)
 
 .debug_abbrev   0x00000000      0x2c1
@@ -358,10 +358,10 @@ LOAD c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr4\libgcc.a
  .debug_abbrev  0x00000000      0x103 iic.o
  .debug_abbrev  0x00000103      0x1be main.o
 
-.debug_line     0x00000000      0x7d2
+.debug_line     0x00000000      0x8c5
  *(.debug_line)
- .debug_line    0x00000000      0x276 iic.o
- .debug_line    0x00000276      0x55c main.o
+ .debug_line    0x00000000      0x26e iic.o
+ .debug_line    0x0000026e      0x657 main.o
 
 .debug_frame    0x00000000       0xf0
  *(.debug_frame)
@@ -375,24 +375,23 @@ LOAD c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr4\libgcc.a
  .debug_str     0x000000d7       0xa2 main.o
                                 0x181 (size before relaxing)
 
-.debug_loc      0x00000000      0x35d
+.debug_loc      0x00000000      0x41b
  *(.debug_loc)
  .debug_loc     0x00000000       0x96 iic.o
- .debug_loc     0x00000096      0x2c7 main.o
+ .debug_loc     0x00000096      0x385 main.o
 
 .debug_macinfo
  *(.debug_macinfo)
 OUTPUT(main.elf elf32-avr)
 LOAD linker stubs
 
-.debug_ranges   0x00000000      0x1f8
- .debug_ranges  0x00000000      0x1f8 main.o
+.debug_ranges   0x00000000      0x288
+ .debug_ranges  0x00000000      0x288 main.o
 
 Cross Reference Table
 
 Symbol                                            File
 I2C_Read                                          iic.o
-                                                  main.o
 I2C_Write                                         iic.o
 PortInit                                          main.o
 ReadTemp                                          main.o
