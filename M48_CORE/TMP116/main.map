@@ -117,7 +117,7 @@ LOAD c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr4\libgcc.a
 .rela.plt
  *(.rela.plt)
 
-.text           0x00000000      0x43a
+.text           0x00000000      0x422
  *(.vectors)
  .vectors       0x00000000       0x34 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr4/crtm48p.o
                 0x00000000                __vectors
@@ -197,32 +197,33 @@ LOAD c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr4\libgcc.a
                 0x0000005a                __vector_16
                 0x0000005a                __vector_18
                 0x0000005a                __vector_20
- .text          0x0000005c      0x16e iic.o
+ .text          0x0000005c      0x182 iic.o
                 0x000000f2                I2C_Read
                 0x0000006c                I2C_Write
                 0x0000005c                TWIInt
- .text          0x000001ca      0x26c main.o
-                0x000003a2                SendStr
-                0x00000278                TWI_ReadWord
-                0x000002b0                TMP116Init
-                0x0000038a                UartInit
-                0x000002d6                ReadTemp
-                0x000001e4                TWI_ReadByte
-                0x000003c4                main
-                0x00000248                TWI_WriteWord
-                0x000001ca                PortInit
-                0x00000216                TWI_WriteByte
- .text          0x00000436        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr4\libgcc.a(_exit.o)
- .text          0x00000436        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr4\libgcc.a(_copy_data.o)
-                0x00000436                . = ALIGN (0x2)
+ .text          0x000001de      0x240 main.o
+                0x0000038c                SendStr
+                0x0000029a                TWI_ReadWord
+                0x00000312                TMP116Init
+                0x00000374                UartInit
+                0x0000031c                ReadTemp
+                0x000001f8                TWI_ReadByte
+                0x000003ae                main
+                0x00000260                TWI_WriteWord
+                0x000002de                TWI_Write
+                0x000001de                PortInit
+                0x00000232                TWI_WriteByte
+ .text          0x0000041e        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr4\libgcc.a(_exit.o)
+ .text          0x0000041e        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr4\libgcc.a(_copy_data.o)
+                0x0000041e                . = ALIGN (0x2)
  *(.text.*)
- .text.libgcc   0x00000436        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr4\libgcc.a(_exit.o)
- .text.libgcc   0x00000436        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr4\libgcc.a(_copy_data.o)
-                0x00000436                . = ALIGN (0x2)
+ .text.libgcc   0x0000041e        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr4\libgcc.a(_exit.o)
+ .text.libgcc   0x0000041e        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr4\libgcc.a(_copy_data.o)
+                0x0000041e                . = ALIGN (0x2)
  *(.fini9)
- .fini9         0x00000436        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr4\libgcc.a(_exit.o)
-                0x00000436                exit
-                0x00000436                _exit
+ .fini9         0x0000041e        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr4\libgcc.a(_exit.o)
+                0x0000041e                exit
+                0x0000041e                _exit
  *(.fini9)
  *(.fini8)
  *(.fini8)
@@ -241,11 +242,11 @@ LOAD c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr4\libgcc.a
  *(.fini1)
  *(.fini1)
  *(.fini0)
- .fini0         0x00000436        0x4 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr4\libgcc.a(_exit.o)
+ .fini0         0x0000041e        0x4 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr4\libgcc.a(_exit.o)
  *(.fini0)
-                0x0000043a                _etext = .
+                0x00000422                _etext = .
 
-.data           0x00800100        0x4 load address 0x0000043a
+.data           0x00800100        0x4 load address 0x00000422
                 0x00800100                PROVIDE (__data_start, .)
  *(.data)
  .data          0x00800100        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr4/crtm48p.o
@@ -273,8 +274,8 @@ LOAD c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr4\libgcc.a
  *(.bss*)
  *(COMMON)
                 0x00800104                PROVIDE (__bss_end, .)
-                0x0000043a                __data_load_start = LOADADDR (.data)
-                0x0000043e                __data_load_end = (__data_load_start + SIZEOF (.data))
+                0x00000422                __data_load_start = LOADADDR (.data)
+                0x00000426                __data_load_end = (__data_load_start + SIZEOF (.data))
 
 .noinit         0x00800104        0x0
                 0x00800104                PROVIDE (__noinit_start, .)
@@ -340,53 +341,53 @@ LOAD c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr4\libgcc.a
                 0x00000020       0x20 main.o
 
 .debug_pubnames
-                0x00000000       0xdb
+                0x00000000       0xe9
  *(.debug_pubnames)
  .debug_pubnames
                 0x00000000       0x38 iic.o
  .debug_pubnames
-                0x00000038       0xa3 main.o
+                0x00000038       0xb1 main.o
 
-.debug_info     0x00000000      0xa2f
+.debug_info     0x00000000      0x8bd
  *(.debug_info)
- .debug_info    0x00000000      0x174 iic.o
- .debug_info    0x00000174      0x8bb main.o
+ .debug_info    0x00000000      0x1bd iic.o
+ .debug_info    0x000001bd      0x700 main.o
  *(.gnu.linkonce.wi.*)
 
-.debug_abbrev   0x00000000      0x2c1
+.debug_abbrev   0x00000000      0x308
  *(.debug_abbrev)
- .debug_abbrev  0x00000000      0x103 iic.o
- .debug_abbrev  0x00000103      0x1be main.o
+ .debug_abbrev  0x00000000      0x123 iic.o
+ .debug_abbrev  0x00000123      0x1e5 main.o
 
-.debug_line     0x00000000      0x8c5
+.debug_line     0x00000000      0x847
  *(.debug_line)
- .debug_line    0x00000000      0x26e iic.o
- .debug_line    0x0000026e      0x657 main.o
+ .debug_line    0x00000000      0x28e iic.o
+ .debug_line    0x0000028e      0x5b9 main.o
 
-.debug_frame    0x00000000       0xf0
+.debug_frame    0x00000000      0x100
  *(.debug_frame)
  .debug_frame   0x00000000       0x40 iic.o
- .debug_frame   0x00000040       0xb0 main.o
+ .debug_frame   0x00000040       0xc0 main.o
 
-.debug_str      0x00000000      0x179
+.debug_str      0x00000000      0x183
  *(.debug_str)
  .debug_str     0x00000000       0xd7 iic.o
                                 0x10b (size before relaxing)
- .debug_str     0x000000d7       0xa2 main.o
-                                0x181 (size before relaxing)
+ .debug_str     0x000000d7       0xac main.o
+                                0x197 (size before relaxing)
 
-.debug_loc      0x00000000      0x41b
+.debug_loc      0x00000000      0x3ad
  *(.debug_loc)
- .debug_loc     0x00000000       0x96 iic.o
- .debug_loc     0x00000096      0x385 main.o
+ .debug_loc     0x00000000       0xae iic.o
+ .debug_loc     0x000000ae      0x2ff main.o
 
 .debug_macinfo
  *(.debug_macinfo)
 OUTPUT(main.elf elf32-avr)
 LOAD linker stubs
 
-.debug_ranges   0x00000000      0x288
- .debug_ranges  0x00000000      0x288 main.o
+.debug_ranges   0x00000000      0x1f8
+ .debug_ranges  0x00000000      0x1f8 main.o
 
 Cross Reference Table
 
@@ -398,9 +399,9 @@ ReadTemp                                          main.o
 SendStr                                           main.o
 TMP116Init                                        main.o
 TWIInt                                            iic.o
-                                                  main.o
 TWI_ReadByte                                      main.o
 TWI_ReadWord                                      main.o
+TWI_Write                                         main.o
 TWI_WriteByte                                     main.o
 TWI_WriteWord                                     main.o
 UartInit                                          main.o

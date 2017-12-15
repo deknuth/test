@@ -91,10 +91,10 @@
  101               	.LM19:
  102 0080 84E9      		ldi r24,lo8(-108)
  103 0082 8093 BC00 		sts 188,r24
- 104               	.LBB12:
- 105               	.LBB13:
- 106               	.LBB14:
- 107               	.LBB15:
+ 104               	.LBB18:
+ 105               	.LBB19:
+ 106               	.LBB20:
+ 107               	.LBB21:
  108               	.LM20:
  109 0086 80E2      		ldi r24,lo8(20000)
  110 0088 9EE4      		ldi r25,hi8(20000)
@@ -111,10 +111,10 @@
  121               	.L5:
  122               	.LM21:
  123 0092 81E0      		ldi r24,lo8(1)
- 124               	.LBE15:
- 125               	.LBE14:
- 126               	.LBE13:
- 127               	.LBE12:
+ 124               	.LBE21:
+ 125               	.LBE20:
+ 126               	.LBE19:
+ 127               	.LBE18:
  128               	.LM22:
  129 0094 0895      		ret
  130               	.LFE9:
@@ -170,102 +170,131 @@
  182 00e4 8091 B900 		lds r24,185
  183 00e8 887F      		andi r24,lo8(-8)
  184 00ea 8832      		cpi r24,lo8(40)
- 185 00ec 01F4      		brne .L17
- 186               	.LM33:
- 187 00ee 84EA      		ldi r24,lo8(-92)
- 188 00f0 8093 BC00 		sts 188,r24
- 189               	.L20:
- 190               	.LM34:
- 191 00f4 8091 BC00 		lds r24,188
- 192 00f8 87FF      		sbrs r24,7
- 193 00fa 00C0      		rjmp .L20
- 194               	.LM35:
- 195 00fc 8091 B900 		lds r24,185
- 196 0100 887F      		andi r24,lo8(-8)
- 197 0102 8031      		cpi r24,lo8(16)
- 198 0104 01F4      		brne .L17
- 199               	.LM36:
- 200 0106 81E9      		ldi r24,lo8(-111)
- 201 0108 8093 BB00 		sts 187,r24
- 202 010c 84E8      		ldi r24,lo8(-124)
- 203 010e 8093 BC00 		sts 188,r24
- 204               	.L21:
- 205               	.LM37:
- 206 0112 8091 BC00 		lds r24,188
- 207 0116 87FF      		sbrs r24,7
- 208 0118 00C0      		rjmp .L21
- 209               	.LM38:
- 210 011a 8091 B900 		lds r24,185
- 211 011e 887F      		andi r24,lo8(-8)
- 212 0120 8034      		cpi r24,lo8(64)
- 213 0122 01F4      		brne .L17
- 214               	.LM39:
- 215 0124 84E8      		ldi r24,lo8(-124)
- 216 0126 8093 BC00 		sts 188,r24
- 217               	.L22:
- 218               	.LM40:
- 219 012a 8091 BC00 		lds r24,188
- 220 012e 87FF      		sbrs r24,7
- 221 0130 00C0      		rjmp .L22
- 222               	.LM41:
- 223 0132 8091 B900 		lds r24,185
- 224 0136 887F      		andi r24,lo8(-8)
- 225 0138 8835      		cpi r24,lo8(88)
- 226 013a 01F4      		brne .L17
- 227               	.LM42:
- 228 013c 9091 BB00 		lds r25,187
- 229               	.LVL6:
- 230               	.LM43:
- 231 0140 84E8      		ldi r24,lo8(-124)
- 232 0142 8093 BC00 		sts 188,r24
- 233               	.L23:
- 234               	.LM44:
- 235 0146 8091 BC00 		lds r24,188
- 236 014a 87FF      		sbrs r24,7
- 237 014c 00C0      		rjmp .L23
- 238               	.LM45:
- 239 014e 8091 BB00 		lds r24,187
- 240               	.LM46:
- 241 0152 392F      		mov r19,r25
- 242               	.LVL7:
- 243 0154 20E0      		ldi r18,lo8(0)
- 244               	.LVL8:
- 245               	.LM47:
- 246 0156 482F      		mov r20,r24
- 247               	.LVL9:
- 248 0158 50E0      		ldi r21,lo8(0)
- 249               	.LVL10:
- 250 015a 422B      		or r20,r18
- 251 015c 532B      		or r21,r19
- 252               	.LVL11:
- 253               	.LM48:
- 254 015e 84E9      		ldi r24,lo8(-108)
- 255 0160 8093 BC00 		sts 188,r24
- 256 0164 00C0      		rjmp .L24
- 257               	.LVL12:
- 258               	.L17:
- 259               	.LM49:
- 260 0166 41E0      		ldi r20,lo8(1)
- 261 0168 50E0      		ldi r21,hi8(1)
- 262               	.LVL13:
- 263               	.L24:
- 264               	.LM50:
- 265 016a CA01      		movw r24,r20
- 266               	.LVL14:
- 267               	/* epilogue start */
- 268 016c 0895      		ret
- 269               	.LFE10:
- 311               	.Letext0:
+ 185 00ec 01F0      		breq .+2
+ 186 00ee 00C0      		rjmp .L17
+ 187 00f0 8CED      		ldi r24,lo8(1500)
+ 188 00f2 95E0      		ldi r25,hi8(1500)
+ 189               	.LVL6:
+ 190               	.LBB22:
+ 191               	.LBB23:
+ 192               	.LBB24:
+ 193               	.LBB25:
+ 194               	.LM33:
+ 195 00f4 28EC      		ldi r18,lo8(200)
+ 196 00f6 30E0      		ldi r19,hi8(200)
+ 197               	.L20:
+ 198 00f8 F901      		movw r30,r18
+ 199               	.LVL7:
+ 200               	/* #APP */
+ 201               	 ;  105 "c:/winavr-20100110/lib/gcc/../../avr/include/util/delay_basic.h" 1
+ 202 00fa 3197      		1: sbiw r30,1
+ 203 00fc 01F4      		brne 1b
+ 204               	 ;  0 "" 2
+ 205               	/* #NOAPP */
+ 206               	.LBE25:
+ 207               	.LBE24:
+ 208               	.LM34:
+ 209 00fe 0197      		sbiw r24,1
+ 210               	.LM35:
+ 211 0100 01F4      		brne .L20
+ 212               	.LBE23:
+ 213               	.LBE22:
+ 214               	.LM36:
+ 215 0102 84EA      		ldi r24,lo8(-92)
+ 216               	.LVL8:
+ 217 0104 8093 BC00 		sts 188,r24
+ 218               	.L21:
+ 219               	.LM37:
+ 220 0108 8091 BC00 		lds r24,188
+ 221 010c 87FF      		sbrs r24,7
+ 222 010e 00C0      		rjmp .L21
+ 223               	.LM38:
+ 224 0110 8091 B900 		lds r24,185
+ 225 0114 887F      		andi r24,lo8(-8)
+ 226 0116 8031      		cpi r24,lo8(16)
+ 227 0118 01F4      		brne .L17
+ 228               	.LM39:
+ 229 011a 81E9      		ldi r24,lo8(-111)
+ 230 011c 8093 BB00 		sts 187,r24
+ 231 0120 84E8      		ldi r24,lo8(-124)
+ 232 0122 8093 BC00 		sts 188,r24
+ 233               	.L22:
+ 234               	.LM40:
+ 235 0126 8091 BC00 		lds r24,188
+ 236 012a 87FF      		sbrs r24,7
+ 237 012c 00C0      		rjmp .L22
+ 238               	.LM41:
+ 239 012e 8091 B900 		lds r24,185
+ 240 0132 887F      		andi r24,lo8(-8)
+ 241 0134 8034      		cpi r24,lo8(64)
+ 242 0136 01F4      		brne .L17
+ 243               	.LM42:
+ 244 0138 84E8      		ldi r24,lo8(-124)
+ 245 013a 8093 BC00 		sts 188,r24
+ 246               	.L23:
+ 247               	.LM43:
+ 248 013e 8091 BC00 		lds r24,188
+ 249 0142 87FF      		sbrs r24,7
+ 250 0144 00C0      		rjmp .L23
+ 251               	.LM44:
+ 252 0146 8091 B900 		lds r24,185
+ 253 014a 887F      		andi r24,lo8(-8)
+ 254 014c 8835      		cpi r24,lo8(88)
+ 255 014e 01F4      		brne .L17
+ 256               	.LM45:
+ 257 0150 9091 BB00 		lds r25,187
+ 258               	.LVL9:
+ 259               	.LM46:
+ 260 0154 84E8      		ldi r24,lo8(-124)
+ 261 0156 8093 BC00 		sts 188,r24
+ 262               	.L24:
+ 263               	.LM47:
+ 264 015a 8091 BC00 		lds r24,188
+ 265 015e 87FF      		sbrs r24,7
+ 266 0160 00C0      		rjmp .L24
+ 267               	.LM48:
+ 268 0162 8091 BB00 		lds r24,187
+ 269               	.LM49:
+ 270 0166 392F      		mov r19,r25
+ 271               	.LVL10:
+ 272 0168 20E0      		ldi r18,lo8(0)
+ 273               	.LVL11:
+ 274               	.LM50:
+ 275 016a 482F      		mov r20,r24
+ 276               	.LVL12:
+ 277 016c 50E0      		ldi r21,lo8(0)
+ 278               	.LVL13:
+ 279 016e 422B      		or r20,r18
+ 280 0170 532B      		or r21,r19
+ 281               	.LVL14:
+ 282               	.LM51:
+ 283 0172 84E9      		ldi r24,lo8(-108)
+ 284 0174 8093 BC00 		sts 188,r24
+ 285 0178 00C0      		rjmp .L25
+ 286               	.LVL15:
+ 287               	.L17:
+ 288               	.LM52:
+ 289 017a 41E0      		ldi r20,lo8(1)
+ 290 017c 50E0      		ldi r21,hi8(1)
+ 291               	.LVL16:
+ 292               	.L25:
+ 293               	.LM53:
+ 294 017e CA01      		movw r24,r20
+ 295               	.LVL17:
+ 296               	/* epilogue start */
+ 297 0180 0895      		ret
+ 298               	.LFE10:
+ 340               	.Letext0:
 DEFINED SYMBOLS
                             *ABS*:00000000 iic.c
-C:\Users\ADMINI~1\AppData\Local\Temp/cc1jD3Kg.s:2      *ABS*:0000003f __SREG__
-C:\Users\ADMINI~1\AppData\Local\Temp/cc1jD3Kg.s:3      *ABS*:0000003e __SP_H__
-C:\Users\ADMINI~1\AppData\Local\Temp/cc1jD3Kg.s:4      *ABS*:0000003d __SP_L__
-C:\Users\ADMINI~1\AppData\Local\Temp/cc1jD3Kg.s:5      *ABS*:00000034 __CCP__
-C:\Users\ADMINI~1\AppData\Local\Temp/cc1jD3Kg.s:6      *ABS*:00000000 __tmp_reg__
-C:\Users\ADMINI~1\AppData\Local\Temp/cc1jD3Kg.s:7      *ABS*:00000001 __zero_reg__
-C:\Users\ADMINI~1\AppData\Local\Temp/cc1jD3Kg.s:18     .text:00000000 TWIInt
-C:\Users\ADMINI~1\AppData\Local\Temp/cc1jD3Kg.s:37     .text:00000010 I2C_Write
-C:\Users\ADMINI~1\AppData\Local\Temp/cc1jD3Kg.s:134    .text:00000096 I2C_Read
+C:\Users\ADMINI~1\AppData\Local\Temp/ccKvRVY5.s:2      *ABS*:0000003f __SREG__
+C:\Users\ADMINI~1\AppData\Local\Temp/ccKvRVY5.s:3      *ABS*:0000003e __SP_H__
+C:\Users\ADMINI~1\AppData\Local\Temp/ccKvRVY5.s:4      *ABS*:0000003d __SP_L__
+C:\Users\ADMINI~1\AppData\Local\Temp/ccKvRVY5.s:5      *ABS*:00000034 __CCP__
+C:\Users\ADMINI~1\AppData\Local\Temp/ccKvRVY5.s:6      *ABS*:00000000 __tmp_reg__
+C:\Users\ADMINI~1\AppData\Local\Temp/ccKvRVY5.s:7      *ABS*:00000001 __zero_reg__
+C:\Users\ADMINI~1\AppData\Local\Temp/ccKvRVY5.s:18     .text:00000000 TWIInt
+C:\Users\ADMINI~1\AppData\Local\Temp/ccKvRVY5.s:37     .text:00000010 I2C_Write
+C:\Users\ADMINI~1\AppData\Local\Temp/ccKvRVY5.s:134    .text:00000096 I2C_Read
 
 NO UNDEFINED SYMBOLS

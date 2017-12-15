@@ -79,10 +79,12 @@ unsigned char I2C_Write(unsigned char Wdata,unsigned char RegAddress)
 unsigned int I2C_Read(unsigned RegAddress)
 {
 	unsigned int temp;
+	
 	Start();
 	Wait();
 	if(TestAck()!=START) 
 		return 1;
+	
 	Write8Bit(WD_DEVICE_ADDR); 	// 写I2C从器件地址和写方式
 	Wait(); 
 	if(TestAck()!=MT_SLA_ACK)
@@ -92,7 +94,9 @@ unsigned int I2C_Read(unsigned RegAddress)
 	Wait();
 	if (TestAck()!=MT_DATA_ACK) 
 		return 1;
-
+	
+	_delay_ms(150);
+	
 	Start(); 		// I2C重新启动
 	Wait();
 	if(TestAck()!=RE_START) 

@@ -26,20 +26,22 @@ unsigned char TWI_ReadByte(void)
     SDA_116_IN;
     for (i = 0; i < 8; i++)
     {
-		SCL_116_H;
+		SCL_116_L;
 		asm("nop");
 		asm("nop");
 		if(SDA_116_HL)
             tmp = (tmp << 1) | 0x01;
         else
             tmp = tmp << 1;
-		_delay_us(3);
-        SCL_116_L;
-		_delay_us(4);
+		_delay_us(2);
+        SCL_116_H;
+		_delay_us(2);
     }
+	SCL_116_L;
+	_delay_us(2);		// 应答
+	SCL_116_H;
     return tmp;
 }
-
 
 void TWI_WriteByte(unsigned char src)
 {
@@ -52,13 +54,11 @@ void TWI_WriteByte(unsigned char src)
         else
             SDA_116_L;
         SCL_116_H;
-        _delay_us(4);
-        SCL_116_L;
-		_delay_us(3);
+        _delay_us(2);
+		SCL_116_L;
+		_delay_us(1);
         src <<= 1;
     }
-	SCL_116_H;
-	SDA_116_IN;
 }
 
 void TWI_WriteWord(unsigned int src)
@@ -71,14 +71,16 @@ void TWI_WriteWord(unsigned int src)
             SDA_116_H;
         else
             SDA_116_L;
-        SCL_116_H;
-        _delay_us(2);
         SCL_116_L;
+        _delay_us(2);
+        SCL_116_H;
 		_delay_us(1);
         src <<= 1;
     }
+	SCL_116_L;			// 应答
+	_delay_us(2);
+	SCL_116_H;
 }
-
 
 unsigned int TWI_ReadWord(void)
 {
@@ -87,93 +89,61 @@ unsigned int TWI_ReadWord(void)
     SDA_116_IN;
     for (i = 0; i < 16; i++)
     {
-		SCL_116_H;
+		SCL_116_L;
+		asm("nop");
+		asm("nop");
 		if (SDA_116_HL)
             regVal = (regVal << 1) | 0x01;
         else
             regVal = regVal << 1;
         _delay_us(2);
-        SCL_116_L;
-		_delay_us(4);
+        SCL_116_H;
+		_delay_us(2);
     }
+	SCL_116_L;
+	_delay_us(2);		// 应答
+	SCL_116_H;
     return regVal;
 }
+#define TWI_STATR	{ SDA_116_OUT; SDA_116_L; _delay_us(1);}
+#define ACK { SCL_116_H; _delay_us(2); SCL_116_L; SDA_116_H;}
+
+void TWI_Write(unsigned char RegAddress,unsigned int Wdata)
+{
+	TWI_STATR;
+	TWI_WriteByte(TMP116_W_ADDR);	// IC slave address
+	TWI_WriteByte(RegAddress);			// configure register address 0x01
+	TWI_WriteWord(Wdata);
+	ACK;
+}
+
 
 void TMP116Init(void)
 {
-	TWI_WriteByte(TMP116_W_ADDR);	// IC slave address
-	_delay_us(2);
-
-	TWI_WriteByte(0x01);			// configure register address 0x01
-	_delay_us(2);
-
-	TWI_WriteWord(0x250);
-	_delay_us(2);
-
+	TWI_Write(0x01,0x250);
 }
+
 
 unsigned int ReadTemp(void)
 {
 	unsigned int value = 0;
-	unsigned char temp = 0;
-	
-	SDA_116_OUT;		
-	SDA_116_L;
-	_delay_us(1);	//start 
-	SCL_116_L;
-	_delay_us(3);
-	
+		
+	TWI_STATR;
 	TWI_WriteByte(TMP116_W_ADDR);	// IC slave address
+	ACK;
+	TWI_WriteByte(0x00);			// data register address 0x00
+	ACK;
+//	_delay_ms(150);
 	
-	_delay_us(4);
-	SCL_116_L;			// 应答
-	_delay_us(4);
-
-	TWI_WriteByte(0x00);				// data register address 0x00
-
-	_delay_us(4);
-	SCL_116_L;			// 应答
-	_delay_us(3);
-	
-	SCL_116_H;
-	_delay_us(3);
-	SDA_116_L;
-	SDA_116_OUT;		
-	_delay_us(3);
-	SCL_116_L;
-	_delay_us(4);	//start
-
 	TWI_WriteByte(TMP116_R_ADDR);	// IC slave address
-	
-	_delay_us(4);
-	SCL_116_L;			// 应答
-	_delay_us(4);
-	
+	ACK;
+//	_delay_ms(150);
 
-	temp = TWI_ReadByte();
-	SCL_116_H;	
-	value = temp;
+	value = TWI_ReadByte();
+	SDA_116_L;
 	value <<= 8;
-	SDA_116_L;
-	SDA_116_OUT;
-	SCL_116_H;
-	_delay_us(4);
-	SCL_116_L;			// 应答
-	_delay_us(4);
-
-	temp = TWI_ReadByte();
-	value |= temp;
-
+	value |= TWI_ReadByte();
 	
-	SDA_116_H;
-	SDA_116_OUT;
-	SCL_116_H;
-	_delay_us(4);
-	SCL_116_L;			// 应答
-	SDA_116_L;
-	_delay_us(4);
-	SCL_116_H;
-	SDA_116_H;
 	return value;
 }
 
@@ -202,14 +172,16 @@ int main(void)
 	UartInit();
 	_delay_ms(300);
 	SendStr("OK",2);
-	TWIInt();
-//	TMP116Init();
+//	TWIInt();
+// TMP116Init();
 	while(1)
 	{
 	//	str[0] = I2C_Read(0x00);
 	//	str[1] = I2C_Read(0x00);
 		i = ReadTemp();
-		//i = I2C_Read(0x01);
+		
+//		I2C_Write(0x01,TMP116_W_ADDR);
+//		i = I2C_Read(0x00);
 		str[0] = (i>>8);
 		str[1] = i&0xFF;
 
